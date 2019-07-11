@@ -1,0 +1,12 @@
+extends ./layout/general-layout/layout.pug
+block container
+  main.main-container
+    .form-container
+      form.login(action="/login", method="post")
+        h1 Login
+        if error.length
+          p= error
+        input#username(type="text", name="username" placeholder="User name" )
+        input#password(type="password", name="password", placeholder="Password")
+        input(type="submit", value="Login")
+        p #[a(href="/register") Create an account]

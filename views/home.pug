@@ -1,0 +1,10 @@
+extends ./layout/general-layout/layout.pug
+include ./layout/movieByQuery-layout/section-container.pug
+include ./layout/movieByQuery-layout/section-header.pug
+
+block container  
+  main.main-container
+    +section-header('Movies')
+    +section-container(movies)
+    +section-header('Series')
+    +section-container(series)

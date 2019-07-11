@@ -1,0 +1,41 @@
+mixin sort-menu(route)
+  if route && !(/search/.test(route))
+    - url = route.replace(/&?sort.[^\&]*/g, '').replace(/page=\d+/, 'page=0')
+    .sort-menu
+      .sort-title Sort by: 
+      .sort-links  
+        a(href=`${url}&sort=title`) 
+          .sort-link title
+            if sort && sort['title'] == -1
+              span.arrow &#9660;
+            if sort && sort['title'] == 1
+              span.arrow &#9650;
+        a(href=`${url}&sort=year`)
+          .sort-link date 
+            if sort && sort['year'] == -1
+              span.arrow &#9660;
+            if sort && sort['year'] == 1
+              span.arrow &#9650;       
+        a(href=`${url}&sort=imdb.rating`) 
+          .sort-link rating 
+            if sort && sort['imdb.rating'] == -1
+              span.arrow &#9660;
+            if sort && sort['imdb.rating'] == 1
+              span.arrow &#9650;
+        
+        
+
+    //- script.
+    //-   const links = document.querySelectorAll('.sort-links a');
+    //-   links.forEach(link =>{
+    //-     if(!sessionStorage.getItem(link.textContent)){
+    //-       sessionStorage.setItem(link.textContent, 'up'); 
+    //-         link.href += ',up';
+    //-     }else if(sessionStorage.getItem(link.textContent) === 'up'){
+    //-       sessionStorage.setItem(link.textContent, 'down');
+    //-         link.href += ',down';
+    //-     }else{
+    //-       sessionStorage.setItem(link.textContent, 'up') 
+    //-         link.href += ',up';
+    //-     }
+    //-   })

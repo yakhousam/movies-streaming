@@ -1,0 +1,16 @@
+mixin pages-nave(pages, currentPage, route)
+  if pages && pages.length > 1
+    - url = route.replace(/&?page=?\d*/g, '')
+    - condition = (currentPage < pages[pages.length - 1]) && true
+    .pages
+      ul
+        if currentPage > 0
+          li #[a(href=`${url}&page=${currentPage - 1}`) <<]
+        each el in pages
+          li
+            if(el != currentPage)
+              a(href=`${url}&page=${el}`) #{el}
+            else
+              span.current-page #{el} 
+        if condition
+          li #[a(href=`${url}&page=${currentPage + 1}`) >>]

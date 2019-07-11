@@ -1,0 +1,37 @@
+{
+  "name": "movies-streaming",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yakhousam/movies-streaming.git"
+  },
+  "keywords": [],
+  "author": "yakhousam",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yakhousam/movies-streaming/issues"
+  },
+  "homepage": "https://github.com/yakhousam/movies-streaming#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^2.2.0",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.0",
+    "express-session": "^1.16.2",
+    "googleapis": "^40.0.0",
+    "helmet": "^3.18.0",
+    "mongoose": "^5.5.9",
+    "node-fetch": "^2.6.0",
+    "passport": "^0.4.0",
+    "passport-github": "^1.1.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3"
+  }
+}

@@ -1,0 +1,19 @@
+extends ./layout/general-layout/layout.pug
+include ./layout/movieByQuery-layout/section-container.pug
+include ./layout/movieByQuery-layout/pages-nave.pug
+include ./layout/movieByQuery-layout/section-header.pug
+include ./layout/movieByQuery-layout/sort-menu.pug
+
+block container  
+  main.main-container
+    if movies && movies.length > 1  
+      +sort-menu(route)   
+    +pages-nave(pages, currentPage, route) 
+    +section-header(title)
+    if people
+      .people-info
+    +section-container(movies)
+    +pages-nave(pages, currentPage, route) 
+block script
+  if people
+    script(type="text/javascript" src="/static/js/people_wiki.js")

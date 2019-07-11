@@ -1,0 +1,53 @@
+header.header
+  form.search(action="/movies") 
+    .inner-form 
+      input#search(type="search", name="search" placeholder="Search...") 
+      .search-options
+        .radio
+          input(type="radio" name="match" id="title" value="title" checked)
+          label(for="title") Title
+        .radio
+          input(type="radio" name="match" id="cast" value="cast")
+          label(for="cast") Actor
+        .radio
+          input(type="radio" name="match" id="directors" value="directors")
+          label(for="directors") Director
+        .radio
+          input(type="radio" name="match" id="writers" value="writers")
+          label(for="writers") Writer
+  .space
+  nav.nav-bare 
+    ul
+      if !index
+        li #[a(href="/") Home]
+      if movieGenres
+        li #[a(href="/movies?type=movie") Movies]
+          ul
+            each genre in movieGenres
+              li 
+                a(href=`/movies?type=movie&genres=${genre._id}`) #{genre._id} 
+                  span #{genre.count}
+      if serieGenres
+        li #[a(href="/movies?type=movie") Series]
+          ul
+            each genre in serieGenres
+              li 
+                a(href=`/movies?type=series&genres=${genre._id}`) #{genre._id} 
+                  span #{genre.count}
+  .space
+  .right  
+    if !authenticated
+      nav.nav-bare
+        ul
+          li.login.menu #[a(href="/login") Login]
+          li.register.menu #[a(href="/register") Register]
+    if authenticated
+      .user-container
+        .user
+          .user-first-letter #{username[0].toUpperCase()}
+          .user-info 
+            p.username #{username}      
+            a(href="/profile") Profile
+            a(href="/logout") Logout
+
+

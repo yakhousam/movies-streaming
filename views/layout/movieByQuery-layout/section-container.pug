@@ -1,0 +1,26 @@
+mixin section-container(param)
+  section.section-container
+    if param
+      each article in param
+        article.movie
+          a(href=`/id/${article._id}`)
+            .poster-container
+              .img-container
+                img(src=`${article.poster || "/static/images/alt1.png"}`)
+              .movie-info
+                h3.movie-year #{ parseInt(article.year) || 'n/a'}
+                h3.movie-rating
+                  if article.imdb && article.imdb.rating
+                    span.rating-star &#9733; 
+                    |#{ article.imdb.rating }
+                  else
+                    | n/a
+              h1.movie-title= article.title
+              .resume
+                h3= article.title
+                p= article.plot
+                span Countries: 
+                  span #{article.countries && article.countries.join(', ')}
+                br
+                span Genres: 
+                  span #{article.genres && article.genres.join(', ')}

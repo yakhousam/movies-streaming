@@ -1,0 +1,21 @@
+doctype html
+html(lang="en")
+  head
+    meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="/static/css/style.css")
+    title= title
+  body
+    block body
+      block header
+          include ./header.pug 
+      .container              
+        block container
+        block aside
+          include ./aside.pug 
+        block foot
+          footer.footer
+            .github
+              a(href="https://github.com/yakhousam/movies-streaming" target="_blank")
+                img(src="/static/images/github.png" alt="github")
+        block script

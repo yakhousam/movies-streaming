@@ -1,0 +1,19 @@
+.comments-container
+  if comments
+    each comment in comments
+      .comment
+        .user
+          .user-first-letter #{comment.user[0].username[0].toUpperCase()}
+        .user-creation Joined on: #{comment.user[0]._id.getTimestamp().toLocaleDateString()}
+        .comment-header 
+          span.username #{comment.user[0].username}
+          span.comment-date #{comment._id.getTimestamp().toLocaleString()}
+        .comment-text-container
+          .comment-text !{`<p>${comment.text.replace(/\n/g, '</p><p>')}</p>`}
+  if authenticated
+    .form-add-comment-container
+      form.add-comment(method="POST")
+        textarea(rows="4" cols="50" name="text" maxlength="200"  minlength="20" required)
+        button(type='submit') Comment
+  else
+    p Want to comment? please #[a(href="/login") Login]
