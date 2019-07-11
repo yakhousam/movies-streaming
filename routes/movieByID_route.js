@@ -19,8 +19,8 @@ router
       }
       movie.runtime = formatTime(movie.runtime);
       const comments = await Comment.getMovieComments(id);
-      console.log("movieById =", movie);
-      console.log("comments =", comments);
+      // console.log("movieById =", movie);
+      // console.log("comments =", comments);
       const queryYoutube = `${movie.title} ${movie.type} official trailer 
     ${movie.year} ${(movie.cast && movie.cast[0]) ||
         (movie.directors && movie.directors[0])} `;
