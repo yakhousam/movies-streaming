@@ -12,7 +12,6 @@ const wikipedia = require('./wikipedia_route');
 router.use(async (req, res, next) => {
   if (!req.session.movieGenres || !req.session.serieGenres) {
     await setupMenu(req);
-    console.log('setup menu');
   }
   res.locals.movieGenres = req.session.movieGenres;
   res.locals.serieGenres = req.session.serieGenres;

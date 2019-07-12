@@ -10,7 +10,7 @@ route.use((req, res, next) => {
     res.locals.username = req.user.username;
     res.locals.authenticated = req.isAuthenticated();
   }
-  console.log('isAuthenticated', req.isAuthenticated());
+  // console.log('isAuthenticated', req.isAuthenticated());
   res.locals.error = req.flash('error');
   res.locals.passwordError = req.flash('passwordError');
   res.locals.usernameError = req.flash('usernameError');

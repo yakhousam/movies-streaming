@@ -17,15 +17,16 @@ function formatTime (runtime){
 
 function formatQuery(req, res) {
   let { page = 0, search, sort, ...filter } = req.query;
-  console.log('res.query =', req.query)
   const query = { page, filter };
-  console.log('filter =', filter);
-  if (query.filter.writers) {
+  if (query.filter.writers) {// because equality does not work eg: sergio leon (srory), sergio leon (screenplay)
     query.search = query.filter.writers; //for paramsTitle
-    const regexp = new RegExp('^' + query.filter.writers, 'i');
+    const regexp = new RegExp('^' + query.filter.writers);
     query.filter = { writers: { $regex: regexp } };
   }
   if (sort) {
+    if(sort === 'imdb.rating'){
+      query.filter['imdb.rating'] = {$type: 'double'}
+    }
     if (!res.locals.sort) {
       res.locals.sort = {};
     }
@@ -46,17 +47,17 @@ function formatQuery(req, res) {
     query.search = search;
     if (!/page/.test(req.url)) {
       query.url = req.url.concat('&page=0');
+    }    
+    let regexp;
+    if(match !=='title' && search.split(/\s+/).length > 1){
+      regexp = new RegExp(search+'|'+search.split(/\s+/).reverse().join(' '), 'i');
+    }else{
+      regexp = new RegExp(search, 'i');
     }
-    if (match === 'title') {
-      query.filter = { $text: { $search: search } };
-      query.projection = { score: { $meta: 'textScore' } };
-      query.sort = { score: { $meta: 'textScore' } };
-    } else {
-      const regexp = new RegExp('^' + search, 'i');
-      query.filter = { [match]: { $regex: regexp } };
-    }
+    query.filter = { $and: [{ $text: { $search: search } }, { [match]: { $regex: regexp } }]}
+    query.projection = { score: { $meta: 'textScore' } };
+    query.sort = { score: { $meta: 'textScore' } };   
   }
-  console.log('query =', query);
   return query;
 }
 

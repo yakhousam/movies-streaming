@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 
 router.get('/wiki/', async (req, res) => {
   const wiki = req.session.people;
-  console.log('wiki =', wiki);
+  // console.log('wiki =', wiki);
   if (!wiki) {
     return res.send('no wiki param');
   }

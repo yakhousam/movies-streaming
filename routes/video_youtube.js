@@ -28,7 +28,7 @@ router.get('/video', (req, res) => {
       }
      
       const response = videos.data.items.map(element => {
-        console.log('https://www.youtube.com/watch?v=' + element.id.videoId);
+        // console.log('https://www.youtube.com/watch?v=' + element.id.videoId);
         return element.id.videoId;
       });
       req.session[req.session.movie_id] = response;

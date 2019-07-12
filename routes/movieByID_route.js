@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { getMovieById } = require("../controllers/movies_controller");
 const Comment = require("../controllers/comment_controller");
-const { formatTime } = require("../controllers/calcul");
+const { formatTime } = require("../controllers/utils");
 const mongoose = require("mongoose");
 
 router

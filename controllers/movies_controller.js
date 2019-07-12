@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Movies = mongoose.model('Movie');
-const { getPages, formatQuery } = require('./calcul');
+const { getPages, formatQuery } = require('./utils');
 
 
 const countMovies = async filter => {
@@ -22,7 +22,7 @@ const getSample = async () => {
     countries: 1,
     genres: 1
   };
-  const size = 5;
+  const size = 30;
   const facet = {
     $facet: {
       movies: [

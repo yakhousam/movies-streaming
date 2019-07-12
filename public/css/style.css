@@ -141,8 +141,7 @@ a {
   text-decoration: none;
 }
 .nav-bare li ul{
-  display: flex;
-  flex-direction: column;
+ /* display: none;*/
   position: absolute;
   top: 100%;
   left: 1em;
@@ -150,6 +149,8 @@ a {
   transform: scale(1, 0);
   transform-origin: top center;
   transition: transform 200ms ease-in 300ms;
+  display: flex;
+  flex-direction: column;
 }
 .nav-bare li:hover ul{
   transform: scale(1, 1);
