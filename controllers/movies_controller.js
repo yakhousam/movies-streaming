@@ -110,8 +110,8 @@ const getMoviesByQuery = async (req, res) => {
     if(sort.title){
       console.log('use collation')
       movies = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2});
-      const explain = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2}).explain();
-      console.log(explain)
+      // const explain = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2}).explain();
+      // console.log(explain)
     }else{
       console.log('no collation used')
       movies = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit);

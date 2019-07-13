@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt');
 
 const dbUri =
-  process.env.NODE_ENV !== 'production'
+  process.env.NODE_ENV === 'production'
     ? process.env.dbUri
     : 'mongodb://localhost/movies';
 
