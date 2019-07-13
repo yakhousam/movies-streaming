@@ -58,11 +58,12 @@ const getMovies = async ({
     const sortStage = { $sort: sort };
     const skipStage = { $skip: skip };
     const limitStage = { $limit: limit };
-    const pipeline = [matchStage, sortStage, skipStage, limitStage];
+    const pipeline = [matchStage , sortStage, skipStage, limitStage];
     if (project) {
       pipeline.push({ $project: project });
     }
-    const movies = await Movies.aggregate(pipeline);
+    console.log('pipeline=', pipeline)
+    const movies = await Movies.aggregate(pipeline).collation({locale: 'fr', numericOrdering: true});
     // console.log('movies = ', movies)
     return movies.filter(
       //remove duplicate document
@@ -98,20 +99,24 @@ const getMoviesByQuery = async (req, res) => {
     if (url) {
       req.url = url;
     }
-    if (query.projection) {
-      projection.score = query.projection.score;
+    if (query.score) {
+      projection.score = query.score;
     }
-    const currentPage = +page;
+    
+    const currentPage = +page || 0;
     const limit = 60;
     const skip = currentPage * limit;
-    const args = {
-      filter,
-      limit,
-      skip,
-      sort,
-      project: projection
-    };
-    const movies = await getMovies(args);
+    let movies;
+    if(sort.title){
+      console.log('use collation')
+      movies = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2});
+      const explain = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2}).explain();
+      console.log(explain)
+    }else{
+      console.log('no collation used')
+      movies = await Movies.find(filter,projection).sort(sort).skip(skip).limit(limit);
+    }
+    
     if (movies.length === 0) {
       return { movies: [], title: 'Not Found' };
     }

@@ -18,6 +18,8 @@ const getMostMoviesView = async () => {
       { view: { $exists: true } },
       projection
     ).limit(10);
+    // const explain = await Movies.find({ view: { $exists: true } }, projection ).limit(10).explain()
+    // console.log(explain)
     return movies;
   } catch (error) {
     console.error(error);

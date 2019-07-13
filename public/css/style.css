@@ -34,72 +34,6 @@ body {
   grid-row: section;
 }
 /*-------------------------------------
-                  footer
---------------------------------------*/
-.footer {
-  grid-column: span 2;
-  grid-row: footer;
-  /* background: #191919;
-  border-radius: 2em / 50%; */
-  border-top: thin solid #7a7a7a
-}
-.github{
-  width: 40px;
-  margin: 1em auto;
-}
-.github img{
-  width: 100%;
-}
-.github:hover{
-  transform: scale(1.1)
-}
-/*************************************************************/
-/*-------------------------------------
-                  general
---------------------------------------*/
-/* .radius {
-  text-transform: capitalize;
-  font-size: 1.5rem;
-  font-weight: normal;
-  border-radius: 1em / 50%;
-  padding: 0.5ch 2ch;
-  border: thick double;
-  color: gray;
-} */
-a {
-  outline: none;
-}
-/********************************************/
-/*-------------------------------------
-                   aside
---------------------------------------*/
-.aside {
-  grid-column: aside;
-  grid-row: section;
-}
-.aside .section-container { 
-  grid-template-columns: repeat(auto-fit, minmax(150px, 0.7fr));
-}
-.aside > h1 {
-  text-align: center;
-  font-size: 1.2rem;
-  font-weight: normal;
-  width: 12ch;
-  margin: 0 auto;
-  color: gray;
-}
-.arrow-down {
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 20px solid red;
-  margin: 0 auto;
-}
-
-/******************************************************************/
-
-/*-------------------------------------
                    header
 --------------------------------------*/
 
@@ -142,17 +76,18 @@ a {
 }
 .nav-bare li ul{
  /* display: none;*/
-  position: absolute;
+ /* visibility: hidden; */
+  /* position: absolute;
   top: 100%;
   left: 1em;
   background: #e0e0e0;
   transform: scale(1, 0);
   transform-origin: top center;
-  transition: transform 200ms ease-in 300ms;
-  display: flex;
-  flex-direction: column;
+  transition: all 200ms ease-in 300ms;
+  display: inline-block; */
 }
 .nav-bare li:hover ul{
+  visibility: visible;
   transform: scale(1, 1);
   transition-delay: 50ms;
 }
@@ -271,35 +206,91 @@ form.search {
 }
 
 /************************************************************/
+/*-------------------------------------
+                  footer
+--------------------------------------*/
+.footer {
+  grid-column: span 2;
+  grid-row: footer;
+  /* background: #191919;
+  border-radius: 2em / 50%; */
+  border-top: thin solid #7a7a7a
+}
+.github{
+  width: 40px;
+  margin: 1em auto;
+}
+.github img{
+  width: 100%;
+}
+.github:hover{
+  transform: scale(1.1)
+}
+/*************************************************************/
+/*-------------------------------------
+                  general
+--------------------------------------*/
+/* .radius {
+  text-transform: capitalize;
+  font-size: 1.5rem;
+  font-weight: normal;
+  border-radius: 1em / 50%;
+  padding: 0.5ch 2ch;
+  border: thick double;
+  color: gray;
+} */
+* {
+  outline: none;
+}
+/********************************************/
+/*-------------------------------------
+                   aside
+--------------------------------------*/
+.aside {
+  grid-column: aside;
+  grid-row: section;
+}
+.aside .section-container { 
+  grid-template-columns: repeat(auto-fit, minmax(150px, 0.7fr));
+}
+.aside > h1 {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: normal;
+  width: 12ch;
+  margin: 0 auto;
+  color: gray;
+}
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid red;
+  margin: 0 auto;
+}
+
+/******************************************************************/
+
+
 
 /*-------------------------------------
             sort menu
 --------------------------------------*/
 .sort-menu {
-  /* border-bottom: thick double gray; */
-  padding-bottom: 1em;
-  color: gray;
-}
-/* .sort-menu .arrow {
-  margin-left: 0.5ch;
-  text-decoration: none;
-} */
-.sort-title {
-  text-align: center;
-}
-.sort-links {
+  max-width: 300px;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 }
-.sort-links a {
+
+.sort-menu a {
   text-transform: capitalize;
   color: gray;
 }
-.sort-link {
-  width: 100px;
-}
-.sort-links a:hover {
+
+.sort-menu a:hover {
   transform: scale(1.1) translateX(0.1em);
 }
 

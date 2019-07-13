@@ -28,7 +28,7 @@ header.header
                 a(href=`/movies?type=movie&genres=${genre._id}`) #{genre._id} 
                   span #{genre.count}
       if serieGenres
-        li #[a(href="/movies?type=movie") Series]
+        li #[a(href="/movies?type=series") Series]
           ul
             each genre in serieGenres
               li 

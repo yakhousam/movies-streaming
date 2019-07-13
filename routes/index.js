@@ -18,6 +18,9 @@ router.use(async (req, res, next) => {
   res.locals.movieCount = req.session.movieCount;
   res.locals.serieCount = req.session.serieCount;
   res.locals.mostMoviesView = await getMostMoviesView();
+  if(res.locals.sort){
+    console.log('res sort =', req.locals.sort)
+  }
   next();
 });
 
@@ -30,7 +33,7 @@ router.use(wikipedia);
 
 router.get('/', async (req, res, next) => {
   try {
-    const title = 'Welcom to mflix: happy watching';
+    const title = 'MFLIX-yakhousam';
     const { movies, series } = await getSample();
     res.render('home', { movies, series, title, index: true });
   } catch (error) {
