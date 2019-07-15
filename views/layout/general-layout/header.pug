@@ -22,6 +22,7 @@ header.header
         li #[a(href="/") Home]
       if movieGenres
         li #[a(href="/movies?type=movie") Movies]
+          span.arrow &#9660;
           ul
             each genre in movieGenres
               li 
@@ -29,6 +30,7 @@ header.header
                   span #{genre.count}
       if serieGenres
         li #[a(href="/movies?type=series") Series]
+          span.arrow &#9660;
           ul
             each genre in serieGenres
               li 

@@ -6,7 +6,7 @@ mixin section-container(param)
           a(href=`/id/${article._id}`)
             .poster-container
               .img-container
-                img(src=`${article.poster || "/static/images/alt1.png"}`)
+                img(src=`${article.poster || "/static/images/alt2.png"}`)
               .movie-info
                 h3.movie-year #{ parseInt(article.year) || 'n/a'}
                 h3.movie-rating
@@ -17,7 +17,7 @@ mixin section-container(param)
                     | n/a
               h1.movie-title= article.title
               .resume
-                h3= article.title
+                h3 #{article.title } #{article.type && `(${article.type})`}
                 p= article.plot
                 span Countries: 
                   span #{article.countries && article.countries.join(', ')}

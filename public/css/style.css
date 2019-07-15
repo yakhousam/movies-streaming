@@ -22,7 +22,7 @@ body {
 }
 .container {
   display: grid;
-  grid-template-columns: [section] 1fr [aside] minmax(0, 0.3fr);
+  grid-template-columns: [section] 1fr [aside] minmax(200px, 0.3fr);
   grid-template-rows: [header] auto [section] 1fr [footer] auto;
   min-height: 100vh;
   background-color: #fafafa;
@@ -54,6 +54,10 @@ body {
 .nav-bare {
   flex: 1;
 }
+.nav-bare .arrow{
+  font-size: .7em;
+  margin-left: .3em
+}
 .nav-bare  ul{
   display: flex;
   justify-content: space-around;
@@ -63,9 +67,10 @@ body {
 }
 .nav-bare > ul > li{
   position: relative;
-  padding:  .5em ;
+  padding:  .8em ;
   background: linear-gradient( #e5e5e5, #fff, #e5e5e5);
   border-radius: 5px;
+  margin-left: .3em;
 }
 .nav-bare > ul > li:hover{
   background: linear-gradient(#fff, #e5e5e5, #fff)
@@ -75,16 +80,17 @@ body {
   text-decoration: none;
 }
 .nav-bare li ul{
- /* display: none;*/
- /* visibility: hidden; */
-  /* position: absolute;
+  /* visibility: hidden; 
+  position: absolute;
   top: 100%;
   left: 1em;
   background: #e0e0e0;
   transform: scale(1, 0);
   transform-origin: top center;
   transition: all 200ms ease-in 300ms;
-  display: inline-block; */
+  display: inline-block;  */
+  max-height: 80vh;
+  overflow: scroll;
 }
 .nav-bare li:hover ul{
   visibility: visible;
@@ -359,7 +365,7 @@ form.search {
 }
 
 .poster-container:hover .img-container {
-  opacity: 0.2;
+  opacity: 0.1;
   transition-delay: 500ms;
 }
 .poster-container:hover .movie-year,
@@ -444,25 +450,30 @@ form.search {
   list-style: none;
   padding: 0;
 }
-.pages li{
+/* .pages li{
   margin: .6em .3em;
-}
-.pages a,
-.current-page {
-  padding: .5em;
+} */
+.pages a{
   text-decoration: none;
-  color: #191919;
-  border: thin solid;
+  color: gray;
 }
-.current-page,
-.pages a:hover {
-  background: #191919;
-  border: thin solid #191919;
-  color: #fff;
-  text-decoration: none;
+.page, .current-page {  
+  width: 2em;
+  height: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: gray;
+  background: radial-gradient(#fff, #ccc);
+  margin: .1em .3em;
 }
-.pages a:hover {
-  text-decoration: underline;
+.page:hover, .current-page {
+  color: white;
+  background: radial-gradient(#ccc, #fff );
+}
+.page:active{
+  transform: scale(0.9)
 }
 
 /******************************************************/
@@ -489,6 +500,12 @@ form.search {
 .movie-view-info {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  grid-gap: 2em;
+}
+.movie-info-poster{
+  margin: 0 auto;
+   max-width: 400px;
+
 }
 .movie-view-info a {
   color: #191919;
@@ -502,7 +519,11 @@ form.search {
 .movie-info-poster img {
   width: 100%;
   min-width: 250px;
+  min-height: 300px;
+  border: none;
+  box-shadow: 0 0 5px 2px #7a7a7a;
 }
+
 .info {
   display: flex;
   align-items: baseline;
@@ -517,7 +538,7 @@ form.search {
   margin-left: 1ch;
 }
 .rating-out meter {
-  width: 15ch;
+  max-width: 15em;
 }
 .plot {
   min-height: 3em;
@@ -548,6 +569,10 @@ form.search {
   top: 0;
   width: 100%;
   height: 100%;
+  text-align: center;
+}
+img.loading{
+  height: 100%;
 }
 .youtube-video-here {
   height: 100%;
@@ -568,6 +593,7 @@ form.search {
   grid-column-gap: 1rem;
   margin: 1rem auto;
   width: 80%;
+ 
 }
 .comment-text-container {
   grid-column: 2;
@@ -633,6 +659,7 @@ form.search {
   font-size: 1.2em;
   border: thin #e0e0e0 solid;
   border-radius: 15px;
+ 
 }
 
 /*****************************************************************/
@@ -669,9 +696,9 @@ form.login input{
 /*-------------------------------------
             media query
 --------------------------------------*/
-@media (max-width: 600px) {
-  .aside,
-  .logo {
+
+@media (max-width: 720px) {
+  .aside {
     display: none;
   }
   .article-view,
@@ -680,18 +707,20 @@ form.login input{
   .infos {
     grid-column: span 2;
   }
-
-  /*
-  .section-container{
-    display: block;
+  .main-container {
+    grid-template-columns: 1fr;
   }
-  .poster-container{
-    width:20em;
-    height: 15em;
+  .section-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
   
-  ul{
-    flex-wrap: wrap;
-  } */
+  .nav-bare > ul > li{
+    padding:  .3em ;
+    margin: 0;
+  }
+  .space{
+    flex: 0;
+  }
+ 
 }
 /***********************************************/

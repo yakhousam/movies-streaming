@@ -7,7 +7,10 @@ function getPages(currentPage, count, limit) {
 }
 
 function formatTime(runtime) {
-  runtime = parseInt(runtime);
+  if(!runtime){
+    return
+  }
+  runtime = parseInt(runtime)
   let hour = Math.trunc(runtime / 60);
   let minute = runtime - hour * 60;
   hour = hour > 10 ? hour : "0" + hour;
@@ -16,39 +19,32 @@ function formatTime(runtime) {
 }
 
 function formatQuery(req, res) {
-  let { page, search, sort, ...filter } = req.query;
+  let { page, search, sort, order, ...filter } = req.query;
   const query = { page, filter };
-  if (query.filter.writers) {
+  const {writers, cast, directors}   = {...filter}
+  req.session.people = writers || cast || directors;// for wikipedia
+  if (writers) {
     // because equality does not work eg: sergio leon (srory), sergio leon (screenplay)
-    query.search = query.filter.writers; //for paramsTitle
-    const regexp = new RegExp("^" + query.filter.writers);
+    query.search = writers; //for paramsTitle
+    const regexp = new RegExp("^" + writers);
     query.filter = { writers: { $regex: regexp } };
   }
   if (sort) {
     if (sort === "imdb.rating") {
       query.filter["imdb.rating"] = { $type: "double" };
     }
-    if (!res.locals.sort) {
-      res.locals.sort = {};
-    }
-    if (!page) {
-      req.session.sort.field =  sort ;
-      req.session.sort.order = req.session.sort.order == 1 ? -1 : 1;
-    }
-    res.locals.sort = req.session.sort;
-    query.sort = { [sort]: req.session.sort.order };
+    query.sort = { [sort]: order };
   } else {
-    res.locals.sort = { field: "title", order: 1 };
-    query.sort = { title : 1 };
+    query.sort = { title: 1 };
   }
   if (search) {
     const { match } = req.query;
     query.search = search;
-    if (!/page/.test(req.url)) {
-      query.url = req.url.concat("&page=0");
-    }
+    // if (!/page/.test(req.url)) {
+    //   query.url = req.url.concat("&page=0");
+    // }
     let regexp;
-    if (match !== "title" && search.split(/\s+/).length > 1) {
+    if (match !== "title" /*&& search.split(/\s+/).length > 1*/) {
       regexp = new RegExp(
         search +
           "|" +
@@ -58,13 +54,15 @@ function formatQuery(req, res) {
             .join(" "),
         "i"
       );
+      query.filter = {
+        $and: [{ $text: { $search: search } }, { [match]: { $regex: regexp } }]
+      };
+      console.log(query.filter['$and'])
     } else {
-      regexp = new RegExp(search, "i");
+      query.filter = { $text: { $search: search } }
     }
-    query.filter = {
-      $and: [{ $text: { $search: search } }, { [match]: { $regex: regexp } }]
-    };
-    query.score = { $meta: "textScore" } ;
+   
+    query.score = { $meta: "textScore" };
     query.sort = { score: { $meta: "textScore" } };
   }
   return query;

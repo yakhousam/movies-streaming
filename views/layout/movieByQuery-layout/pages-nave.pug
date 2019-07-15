@@ -5,12 +5,13 @@ mixin pages-nave(pages, currentPage, route)
     .pages
       ul
         if currentPage > 0
-          li #[a(href=`${url}&page=${currentPage - 1}`) <<]
+          li #[a(href=`${url}&page=${currentPage - 1}`) #[div.page <<]]
         each el in pages
           li
             if(el != currentPage)
-              a(href=`${url}&page=${el}`) #{el}
+              a(href=`${url}&page=${el}`) 
+                .page= el
             else
-              span.current-page #{el} 
+              .current-page= el 
         if condition
-          li #[a(href=`${url}&page=${currentPage + 1}`) >>]
+          li #[a(href=`${url}&page=${currentPage + 1}`) #[div.page >>]]

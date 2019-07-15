@@ -2,10 +2,10 @@ mixin section-header(title)
   .section-header 
     if !index
       h1= title && title
-    if index && title == "Movies"
-      a(href='/movies?type=movie')
-        h1 Movies #{movieCount}
-    if index && title == "Series"
-      a(href='/movies?type=series')
-        h1 Series #{serieCount}
+    //- if index && title == "Movies"
+    //-   a(href='/movies?type=movie')
+    //-     h1 Movies #{movieCount}
+    //- if index && title == "Series"
+    //-   a(href='/movies?type=series')
+    //-     h1 Series #{serieCount}
     .arrow-down

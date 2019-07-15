@@ -1,41 +1,19 @@
 mixin sort-menu(route)
   if route && !(/search/.test(route))
-    - url = route.replace(/&?sort.[^\&]*/g, '').replace(/&page=\d+/, '')
+    - url = route.replace(/&?sort.[^\&]*/g, '').replace(/&page=\d+/g, '').replace(/&order=-?\d+/g, '')
     .sort-menu
-      a(href=`${url}&sort=title`) 
-        .sort-link title
-          if !sort
-            span.arrow &#9650;
-          if sort && sort.field == 'title' && sort.order == -1
+      a(href=`${url}&sort=title&order=${ sort && -sort.title || 1}`) Title
+          if sort && sort.title == -1
             span.arrow &#9660;
-          if sort && sort.field == 'title' && sort.order == 1
+          if sort && sort.title == 1
             span.arrow &#9650;
-      a(href=`${url}&sort=year`)
-        .sort-link date 
-          if sort && sort.field === 'year' && sort.order == -1
+      a(href=`${url}&sort=year&order=${ sort && -sort.year || -1}`) Date 
+          if sort && sort.year == -1
             span.arrow &#9660;
-          if sort && sort.field === 'year' && sort.order == 1
+          if sort && sort.year == 1
             span.arrow &#9650;       
-      a(href=`${url}&sort=imdb.rating`) 
-        .sort-link rating 
-          if sort && sort.field === 'imdb.rating' && sort.order == -1
+      a(href=`${url}&sort=imdb.rating&order=${ sort && -sort['imdb.rating'] || -1}`) Rating 
+          if sort && sort['imdb.rating'] == -1
             span.arrow &#9660;
-          if sort && sort.field === 'imdb.rating' && sort.order == 1
+          if sort && sort['imdb.rating'] == 1
             span.arrow &#9650;
-
-
-
-    //- script.
-    //-   const links = document.querySelectorAll('.sort-links a');
-    //-   links.forEach(link =>{
-    //-     if(!sessionStorage.getItem(link.textContent)){
-    //-       sessionStorage.setItem(link.textContent, 'up'); 
-    //-         link.href += ',up';
-    //-     }else if(sessionStorage.getItem(link.textContent) === 'up'){
-    //-       sessionStorage.setItem(link.textContent, 'down');
-    //-         link.href += ',down';
-    //-     }else{
-    //-       sessionStorage.setItem(link.textContent, 'up') 
-    //-         link.href += ',up';
-    //-     }
-    //-   })

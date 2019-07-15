@@ -23,21 +23,21 @@
         h3 Cast:
         p
           each el in movie.cast
-            a(href=`/movies?cast=${el}&page=0`) #{el}
+            a(href=`/movies?cast=${el}`) #{el}
             | 
     if movie.directors && movie.directors.length
       .info
         h3 Directors:
         p
           each el in movie.directors
-            a(href=`/movies?directors=${el}&page=0`) #{el}
+            a(href=`/movies?directors=${el}`) #{el}
             | 
     if movie.writers && movie.writers.length
       .info
         h3 Writers:
         p
           each el in movie.writers
-            a(href=`/movies?writers=${el.split('(')[0].trim()}&page=0`) #{el}
+            a(href=`/movies?writers=${el.split('(')[0].trim()}`) #{el}
             | 
     if movie.countries && movie.countries.length
       .info
@@ -48,7 +48,7 @@
         h3 Genres:
         p 
           each el in movie.genres
-            a(href=`/movies?genres=${el}&page=0`) #{el}
+            a(href=`/movies?genres=${el}`) #{el}
             | 
     if movie.imdb && movie.imdb.rating
       .info
@@ -56,6 +56,3 @@
         .rating-out
           meter(min=0 max=10 low=4 heigh=7 value=movie.imdb.rating) 
           span #{movie.imdb.rating} 
-        //- .rating-out
-        //-   .rating-in(style=`width:${movie.imdb.rating * 10}%;`)
-        

@@ -13,7 +13,7 @@
   if authenticated
     .form-add-comment-container
       form.add-comment(method="POST")
-        textarea(rows="4" cols="50" name="text" maxlength="200"  minlength="20" required)
+        textarea(rows="4"  name="text" maxlength="200"  minlength="20" required)
         button(type='submit') Comment
   else
     p Want to comment? please #[a(href="/login") Login]

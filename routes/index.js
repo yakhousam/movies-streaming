@@ -18,9 +18,6 @@ router.use(async (req, res, next) => {
   res.locals.movieCount = req.session.movieCount;
   res.locals.serieCount = req.session.serieCount;
   res.locals.mostMoviesView = await getMostMoviesView();
-  if(res.locals.sort){
-    console.log('res sort =', req.locals.sort)
-  }
   next();
 });
 
@@ -34,8 +31,10 @@ router.use(wikipedia);
 router.get('/', async (req, res, next) => {
   try {
     const title = 'MFLIX-yakhousam';
-    const { movies, series } = await getSample();
-    res.render('home', { movies, series, title, index: true });
+    // const { movies, series } = await getSample();
+    // res.render('home', { movies, series, title, index: true });
+    const movies = await getSample()
+    res.render('home', { movies, title, index: true });
   } catch (error) {
     next(error);
   }
