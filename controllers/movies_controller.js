@@ -69,8 +69,7 @@ const getMoviesByQuery = async (req, res) => {
     }
     if (query.score) {
       project.score = query.score;
-    }
-    
+    }    
     const currentPage = +page;
     const limit = 60;
     const skip = currentPage * limit;
@@ -78,12 +77,16 @@ const getMoviesByQuery = async (req, res) => {
     let movies;
     if(sort.title){
       movies = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2});
-      const explain = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2}).explain();
-      console.log("Movies by query explain use collation", explain)
+      if(process.env.NODE_ENV !== 'production'){
+        const explain = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2}).explain();
+        console.log("Movies by query explain use collation", explain)
+      }
     }else{
       movies = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit);
-      const explain = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).explain();
-      console.log("Movies by query explain no collation", explain)
+      if(process.env.NODE_ENV !== 'production'){
+        const explain = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).explain();
+        console.log("Movies by query explain no collation", explain)
+      }      
     }
     movies = movies.filter(
       //remove duplicate document
