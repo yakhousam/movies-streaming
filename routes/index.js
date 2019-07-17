@@ -19,6 +19,9 @@ router.use(async (req, res, next) => {
   res.locals.serieCount = req.session.serieCount;
   res.locals.blackTheme = req.session.blackTheme;
   res.locals.mostMoviesView = await getMostMoviesView();
+  if(process.env.NODE_ENV === 'production'){
+    res.locals.production = true;
+  }
   next();
 });
 

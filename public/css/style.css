@@ -80,6 +80,7 @@ body {
   border-radius: 5px;
   margin-left: .3em;
   display: inline-block;
+  box-sizing: border-box;
 }
 .nav-bare > ul > li > a:hover{
   background: linear-gradient(var(--gradian-color-1), var(--gradian-color-3), var(--gradian-color-1))
@@ -98,6 +99,7 @@ body {
   transform-origin: top center;
   transition: all 200ms ease-in 300ms; */
   overflow: auto;
+  z-index: 10;
 }
 .nav-bare li:hover ul{
   visibility: visible;
@@ -105,7 +107,7 @@ body {
   transition-delay: 100ms;
 }
 .nav-bare li ul li a{
-  min-width: 17ch;  
+  min-width: 15ch;  
   padding: 1px 5px;
   display: flex;
   justify-content: space-between;
@@ -152,6 +154,7 @@ body {
   transform: scale(1, 0);
   transform-origin: top center;
   transition: transform 200ms ease-in 50ms;
+  z-index: 10;
 }
 .user-info a{
   color: var(--text-color-2);
@@ -336,7 +339,9 @@ form.search {
   border-bottom: thin solid;
   text-transform: capitalize;
 }
-
+.people-info{
+  padding: 0 1em;
+}
 /**************************************************************/
 
 /*-------------------------------------
@@ -345,10 +350,10 @@ form.search {
 .section-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 0.4fr));
-  grid-gap: 2rem;
-  padding: 1rem;
+  grid-gap: 2em;
+  padding: 1em;
   justify-content: center;
-  grid-auto-flow: dense;
+  /* grid-auto-flow: dense; */
   min-height: 50vh;
 }
 
@@ -726,14 +731,14 @@ form.login input{
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
   
-  .nav-bare > ul > li{
+  /* .nav-bare > ul > li > a{
     padding: .5em .3em ;
     margin: 0;
-  }
+  } */
   .header{
     justify-content: space-between
   }
-  .right, .space, .nav-bare, form.search{
+   .space, .nav-bare, form.search{
     flex: 0;
   }
   .nav-bare li ul{

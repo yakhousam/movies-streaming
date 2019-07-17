@@ -3,14 +3,17 @@ html(lang="en")
   head
     meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    link(rel="stylesheet", href="/static/css/style.css")
+    if production
+      link(rel="stylesheet", href="/static/css/style-production.css")
+    else
+      link(rel="stylesheet", href="/static/css/style.css")
     title= title
   style
     if blackTheme == 1
       |:root{--bg-container-color: #0f0f0f; --text-color: #e0e0e0; --text-color-2: #fff; --gradian-color-1:#000; --gradian-color-2: #808080; --gradian-color-3: #808080; --gradian-color-4: #7a7a7a; --bg-clr-1: #1f1f1f; --shadow-1: #858585}
     else
       |:root{--bg-container-color: #fafafa; --text-color: #808080; --text-color-2: #191919; --gradian-color-1:#fff; --gradian-color-2: #f0f0f0; --gradian-color-3: #e5e5e5; --gradian-color-4: #ccc; --bg-clr-1: #e0e0e0; --shadow-1: #7a7a7a}
-    |.nav-bare li ul{visibility: hidden;position: absolute;top: 100%;left: 0;background: var(--bg-clr-1);transform: scale(1, 0);transform-origin: top center; transition: all 200ms ease-in 300ms;display: inline-block;}
+    |.nav-bare li ul{visibility: hidden;position: absolute;top: 100%;left: 0;background: var(--bg-clr-1);-webkit-transform: scale(1, 0);-ms-transform: scale(1, 0);transform: scale(1, 0);-webkit-transform-origin: top center;-ms-transform-origin: top center;transform-origin: top center; -webkit-transition: all 200ms ease-in 300ms; -o-transition: all 200ms ease-in 300ms; transition: all 200ms ease-in 300ms;display: inline-block;}
   body
     block body
       block header
