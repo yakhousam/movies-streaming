@@ -88,6 +88,9 @@ const getMoviesByQuery = async (req, res) => {
         console.log("Movies by query explain no collation", explain)
       }      
     }
+    if (movies.length === 0) {
+      return { movies: [], title: 'Not Found', headerTitle:  'Not Found'};
+    }
     movies = movies.filter(
       //remove duplicate document
       (mv, i, arr) =>
@@ -99,9 +102,6 @@ const getMoviesByQuery = async (req, res) => {
         ) === i
     );
     res.locals.sort = sort;
-    if (movies.length === 0) {
-      return { movies: [], title: 'Not Found' };
-    }
     const count = await countMovies(filter);
     let movieType = movies[0].type;
     movieType = movieType.endsWith('s') ? movieType : movieType + 's';
@@ -116,7 +116,7 @@ const getMoviesByQuery = async (req, res) => {
       movies,
       type: movieType,
       title: 'MFLIX-yakhousam: ' + pageTitle,
-      headerTitle: pageTitle,
+      headerTitle: pageTitle ,
       pages: getPages(currentPage, count, limit) || [],
       route: req.url,
       currentPage,

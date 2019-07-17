@@ -17,6 +17,7 @@ router.use(async (req, res, next) => {
   res.locals.serieGenres = req.session.serieGenres;
   res.locals.movieCount = req.session.movieCount;
   res.locals.serieCount = req.session.serieCount;
+  res.locals.blackTheme = req.session.blackTheme;
   res.locals.mostMoviesView = await getMostMoviesView();
   next();
 });
@@ -39,6 +40,13 @@ router.get('/', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/theme', (req, res, next) => {
+  console.log('req.query.blackTheme=', req.query.blackTheme)
+  req.session.blackTheme = req.query.blackTheme;
+  res.locals.blackTheme = req.query.blackTheme;
+  res.redirect(req.header('Referer') || '/')
+})
 
 router.use((req, res, next) => {
   res.render('404');

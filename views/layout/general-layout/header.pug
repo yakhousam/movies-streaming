@@ -21,22 +21,30 @@ header.header
       if !index
         li #[a(href="/") Home]
       if movieGenres
-        li #[a(href="/movies?type=movie") Movies]
-          span.arrow &#9660;
+        li
+          a(href="/movies?type=movie") Movies
+            span.arrow &#9660;
           ul
             each genre in movieGenres
               li 
                 a(href=`/movies?type=movie&genres=${genre._id}`) #{genre._id} 
                   span #{genre.count}
       if serieGenres
-        li #[a(href="/movies?type=series") Series]
-          span.arrow &#9660;
+        li
+          a(href="/movies?type=series") Series
+            span.arrow &#9660;
           ul
             each genre in serieGenres
               li 
                 a(href=`/movies?type=series&genres=${genre._id}`) #{genre._id} 
                   span #{genre.count}
-  .space
+  .theme
+    if blackTheme == 1
+      a(href='/theme?blackTheme=0')
+        img(src="/static/images/sun.png")
+    else
+      a(href='/theme?blackTheme=1') 
+        img(src="/static/images/moon.png")    
   .right  
     if !authenticated
       nav.nav-bare

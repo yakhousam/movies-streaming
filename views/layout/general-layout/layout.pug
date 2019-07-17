@@ -5,13 +5,17 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     link(rel="stylesheet", href="/static/css/style.css")
     title= title
-  style.
-    .nav-bare li ul{visibility: hidden;position: absolute;top: 100%;left: 1em;background: #e0e0e0;transform: scale(1, 0);transform-origin: top center; transition: all 200ms ease-in 300ms;display: inline-block;}
+  style
+    if blackTheme == 1
+      |:root{--bg-container-color: #0f0f0f; --text-color: #e0e0e0; --text-color-2: #fff; --gradian-color-1:#000; --gradian-color-2: #808080; --gradian-color-3: #808080; --gradian-color-4: #7a7a7a; --bg-clr-1: #1f1f1f; --shadow-1: #858585}
+    else
+      |:root{--bg-container-color: #fafafa; --text-color: #808080; --text-color-2: #191919; --gradian-color-1:#fff; --gradian-color-2: #f0f0f0; --gradian-color-3: #e5e5e5; --gradian-color-4: #ccc; --bg-clr-1: #e0e0e0; --shadow-1: #7a7a7a}
+    |.nav-bare li ul{visibility: hidden;position: absolute;top: 100%;left: 0;background: var(--bg-clr-1);transform: scale(1, 0);transform-origin: top center; transition: all 200ms ease-in 300ms;display: inline-block;}
   body
     block body
       block header
-          include ./header.pug 
-      .container              
+        include ./header.pug
+      .container   
         block container
         block aside
           include ./aside.pug 
