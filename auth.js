@@ -76,6 +76,14 @@ passport.use(new GoogleStrategy({
   callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
+  console.log('gogole profile =', profile)
+  const update = {
+    social: { google: { 
+      id: profile.id, 
+      username: profile.username,
+      photo: profile.photos[0].value 
+    } }
+  };
   User.findOneAndUpdate({ "social.google.id": profile.id},update , { upsert: true , new: true,  useFindAndModify: false }, function (err, user) {
     return cb(err, user);
   });
