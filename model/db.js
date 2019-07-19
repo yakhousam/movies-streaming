@@ -49,6 +49,11 @@ const userSchema = new Schema({
       id: String,
       username: String,
       photo: String
+    },
+    google: {
+      id: String,
+      username: String,
+      photo: String
     }
   }
 });

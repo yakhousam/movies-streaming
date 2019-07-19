@@ -7,8 +7,8 @@ const router = express.Router();
 
 router.use((req, res, next) => {
   if (req.isAuthenticated()) {
-    res.locals.username = req.user.local.username || req.user.social.github.username || req.user.social.twitter.username;
-    res.locals.userPhoto = req.user.social.github.photo || req.user.social.twitter.photo;
+    res.locals.username = req.user.local.username || req.user.social.github.username || req.user.social.twitter.username || req.user.social.google.username;
+    res.locals.userPhoto = req.user.social.github.photo || req.user.social.twitter.photo || req.user.social.google.photo;
     res.locals.authenticated = req.isAuthenticated();
   }
   
@@ -109,6 +109,18 @@ router.get('/auth/twitter/callback',
     // Successful authentication, redirect home.
     res.redirect(req.session.redirectTo || '/');
   });
+
+// google login
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile'] }));
+
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect(req.session.redirectTo || '/');
+  });
+
 
 
 router.get('/logout', (req, res) => {

@@ -2,6 +2,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const GitHubStrategy = require('passport-github').Strategy;
 const TwitterStrategy = require('passport-twitter').Strategy;
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 
@@ -68,7 +69,18 @@ function(token, tokenSecret, profile, cb) {
 }
 ));
 
-
+// google strategy
+passport.use(new GoogleStrategy({
+  clientID: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/google/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  User.findOneAndUpdate({ "social.google.id": profile.id},update , { upsert: true , new: true,  useFindAndModify: false }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
 
 module.exports = function() {
   passport.serializeUser(function(user, done) {

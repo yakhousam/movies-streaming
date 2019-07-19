@@ -29,6 +29,9 @@ router
           }else if(comment.user[0].social.twitter) {
             username = comment.user[0].social.twitter.username
             photo = comment.user[0].social.twitter.photo
+          }else if(comment.user[0].social.google) {
+            username = comment.user[0].social.google.username
+            photo = comment.user[0].social.google.photo
           }
         comment.user = { username, photo}
         return comment;
