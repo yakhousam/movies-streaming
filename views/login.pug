@@ -5,6 +5,7 @@ block container
       .social-login
         a(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Login with github
         a(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Login with twiter
+        a(href="/auth/google") #[img(src="/static/images/google.png" width="40px")] Login with google
       form.login(action="/login", method="post")
         h1 Login
         if error.length
