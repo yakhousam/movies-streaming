@@ -9,10 +9,12 @@ const projection = {
   type: 1,
   plot: 1,
   countries: 1,
-  genres: 1
+  genres: 1,
+  view: 1
 };
 
 const getMostMoviesView = async () => {
+  // console.log('getMostMoviesView')
   try {
     const movies = await Movies.find(
       { view: { $exists: true } },

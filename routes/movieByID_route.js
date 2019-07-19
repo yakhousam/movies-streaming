@@ -9,7 +9,6 @@ router
   .get(async (req, res, next) => {
     try {
       const id = mongoose.Types.ObjectId(req.params.id);
-      req.session.movie_id = id;
       const movie = await getMovieById(id);
       if (!movie) {
         return res.render("movieByID", {
@@ -20,11 +19,22 @@ router
       movie.runtime = formatTime(movie.runtime);
       const comments = await Comment.getMovieComments(id);
       // console.log("movieById =", movie);
+      comments.forEach(comment =>{
+        let username, photo;
+        if(comment.user[0].local) username = comment.user[0].local.username
+        else if (comment.user[0].social)
+          if(comment.user[0].social.github) {
+            username = comment.user[0].social.github.username
+            photo = comment.user[0].social.github.photo
+          }else if(comment.user[0].social.twitter) {
+            username = comment.user[0].social.twitter.username
+            photo = comment.user[0].social.twitter.photo
+          }
+        comment.user = { username, photo}
+        return comment;
+      })
       // console.log("comments =", comments);
-      const queryYoutube = `${movie.title} ${movie.type} official trailer 
-    ${movie.year} ${(movie.cast && movie.cast[0]) ||
-        (movie.directors && movie.directors[0])} `;
-      req.session.queryYoutube = queryYoutube;
+      
       res.render("movieByID", {
         movie,
         comments,
@@ -38,16 +48,17 @@ router
     if (!req.isAuthenticated()) {
       return res.redirect("/login");
     }
+    const id = mongoose.Types.ObjectId(req.params.id);
     try {
       await Comment.addComment(
-        req.session.movie_id,
+        id,
         req.user.id,
         req.body.text.slice(0, 200)
       );
-      res.redirect(`/id/${req.session.movie_id}`);
+      res.redirect(`/id/${id}`);
     } catch (error) {
       console.log(error);
-      res.redirect(`/id/${req.session.movie_id}`);
+      res.redirect(`/id/${id}`);
     }
   });
 

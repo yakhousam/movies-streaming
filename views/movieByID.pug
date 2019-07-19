@@ -5,7 +5,30 @@ block container
     include ./layout/movieById-layout/video.pug
     include ./layout/movieById-layout/comments.pug
 block script
-  script(type="text/javascript" src="/static/js/script_youtube.js")
+  - const queryYoutube = `${movie.title} ${movie.type} official trailer ${movie.year} ${(movie.cast && movie.cast[0]) ||(movie.directors && movie.directors[0])} `;
+  script(type="text/javascript" ).
+     // Load the IFrame Player API code asynchronously.
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/player_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Replace the 'player' element with an <iframe> and
+    // YouTube player after the API code downloads.
+    var player;
+    function onYouTubePlayerAPIReady() {
+      fetch("/video?queryYoutube="+"#{queryYoutube}")
+        .then(res => res.json())
+        .then(videos => {
+          player = new YT.Player('player', {
+            // height: '360',
+            // width: '640',
+            videoId: videos[0]
+          });
+        })
+        .catch(console.error);
+
+      }
+        
     
-  
-    
+      

@@ -1,12 +1,14 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+const GitHubStrategy = require('passport-github').Strategy;
+const TwitterStrategy = require('passport-twitter').Strategy;
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 
-
+// local strategy
 passport.use(
   new LocalStrategy(function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
+    User.findOne({ "local.username": username }, function(err, user) {
       if (err) {
         return done(err);
       }
@@ -25,9 +27,52 @@ passport.use(
   })
 );
 
+// github strategy
+passport.use(new GitHubStrategy({
+  clientID: "c6aba0891770c9b3a301",
+  clientSecret: "fe4b968282566b640b58a788aab75ae67da4c978",
+  callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+},
+function(accessToken, refreshToken, profile, cb) {
+  const update = {
+    social: { github: { 
+      id: profile.id, 
+      username: profile.username,
+      photo: profile.photos[0].value 
+    } }
+  };
+  User.findOneAndUpdate({ "social.github.id": profile.id},update , { upsert: true , new: true,  useFindAndModify: false }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+// twitter strategy
+passport.use(new TwitterStrategy({
+  consumerKey: process.env.TWITTER_CONSUMER_KEY,
+  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+  callbackURL: "https://mflix-yakhousam.herokuapp/auth/twitter/callback"
+},
+function(token, tokenSecret, profile, cb) {
+  console.log('twitter profile =', profile)
+  const update = {
+    social: { twitter: { 
+      id: profile.id, 
+      username: profile.username,
+      photo: profile.photos[0].value 
+    } }
+  };
+  User.findOneAndUpdate({ "social.twitter.id": profile.id},update , { upsert: true , new: true,  useFindAndModify: false }, function (err, user) {
+    return cb(err, user);
+  });
+}
+));
+
+
+
 module.exports = function() {
   passport.serializeUser(function(user, done) {
-    done(null, user._id);
+    done(null, user.id);
   });
   passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {

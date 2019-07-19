@@ -2,6 +2,9 @@ extends ./layout/general-layout/layout.pug
 block container
   main.main-container
     .form-container
+      .social-login
+        a(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Login with github
+        a(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Login with twiter
       form.login(action="/login", method="post")
         h1 Login
         if error.length

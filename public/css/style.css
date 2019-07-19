@@ -118,6 +118,9 @@ body {
   background: var(--text-color-2);
   color:  var(--bg-clr-1);
 }
+.theme img{
+  transform: rotate(-30deg)
+}
 .space, .theme{
   flex: 1;
   text-align: center;
@@ -138,7 +141,7 @@ body {
   padding-top: 3em;
   height: 0;
   border-radius: 50%;
-  margin-right: .5em;
+  margin-right: 1em;
 }
 .user-info {
   width: 150px;
@@ -181,6 +184,14 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   font-size: 2em;
+}
+.user img{
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  border-radius: 50%;
+  /* border: thin solid gray; */
 }
 
 /*****  search bar ********/
@@ -370,6 +381,7 @@ form.search {
   bottom: 0;
   z-index: 1;
   background: black;
+  background: linear-gradient(black, gray);
   transition: opacity 500ms linear 200ms;
 }
 .poster-container img {
@@ -496,6 +508,7 @@ form.search {
 
 .article-view{
   padding: 0 1em;
+  color: var(--text-color-2)
 }
 .article-view .title {
   font-weight: bold;
@@ -622,7 +635,8 @@ img.loading{
 }
 .comment-text {
   padding: 0.5em;
-  background: var(--bg-clr-1);
+  background: var(--text-color);
+  color: var(--bg-container-color);
   border-radius: 15px;
 }
 .comment p {
@@ -674,9 +688,15 @@ img.loading{
   font-size: 1.2em;
   border: thin var(--bg-clr-1) solid;
   border-radius: 15px;
-  color: var(--text-color);
-  background: var(--bg-clr-1);
+  color: var(--text-color-2);
+  background: var(--gradian-color-2);
  
+}
+.comments-container a{
+  color: var(--text-color)
+}
+.comments-container a:hover{
+  color: var(--text-color-2)
 }
 
 /*****************************************************************/
@@ -689,8 +709,9 @@ width: 90%;
 height: 80vh;
 margin: 2em auto;
 display: flex;
-justify-content: center;
+justify-content: space-around;
 align-items: center;
+flex-wrap: wrap-reverse;
 border-radius: 5px;
 box-shadow: 0 0 3px 3px var(--gradian-color-4) inset;
 } 
@@ -708,6 +729,20 @@ form.login input{
   box-sizing: border-box;
   height: 3em;
   margin: 1em;
+}
+.social-login a {
+  display: block;
+  width: 250px;
+  padding: .5em;
+  border: thin solid;
+  text-decoration: none;  
+  margin-bottom: 1em;
+  background: var(--text-color-2);
+  color: var(--bg-container-color);
+}
+.social-login img{
+  vertical-align: middle;
+  margin-right: 1em;
 }
 /*************************************************************/
 /*-------------------------------------

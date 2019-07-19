@@ -27,25 +27,8 @@ const countMovies = async filter => {
 
 const getSample = async () => {
   const project = {...projection}
-  // const size = 30;
-  // const facet = {
-  //   $facet: {
-  //     movies: [
-  //       { $match: { type: 'movie', poster: { $ne: null } } },
-  //       { $sample: { size } },
-  //       { $project: project }
-  //     ],
-  //     series: [
-  //       { $match: { type: 'series', poster: { $ne: null } } },
-  //       { $sample: { size } },
-  //       { $project: project }
-  //     ]
-  //   }
-  // };
   try {
-    // const samples = await Movies.aggregate([facet]);
     const samples = await Movies.aggregate([{$sample:{size:100}}, { $match: { poster: { $ne: null } } }, {$limit: 60}, {$project: project}]);
-    // console.log(samples)
     return samples;
   } catch (error) {
     console.error(error)
@@ -75,10 +58,10 @@ const getMoviesByQuery = async (req, res) => {
     const skip = currentPage * limit;
     console.log('filter=', filter)
     let movies;
-    if(sort.title){
-      movies = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2});
+    if(sort.title && filter.type){
+      movies = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr'});
       if(process.env.NODE_ENV !== 'production'){
-        const explain = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr', strength: 2}).explain();
+        const explain = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr'}).explain();
         console.log("Movies by query explain use collation", explain)
       }
     }else{
@@ -120,7 +103,6 @@ const getMoviesByQuery = async (req, res) => {
       pages: getPages(currentPage, count, limit) || [],
       route: req.url,
       currentPage,
-      people: req.session.people
     };
   } catch (error) {
     console.log(error);
@@ -149,7 +131,6 @@ const getMovieById = async id => {
 ===============*/    
 module.exports = {
   getSample,
-  // getMovies,
   getMoviesByQuery,
   getMovieById
 };

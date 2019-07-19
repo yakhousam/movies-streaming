@@ -16,4 +16,16 @@ block container
     +pages-nave(pages, currentPage, route) 
 block script
   if people
-    script(type="text/javascript" src="/static/js/people_wiki.js")
+    script(type="text/javascript").
+      const peopleInfo = document.querySelector('.people-info');
+      const people = "#{people}"
+      console.log('wikipedia people=', people)
+      fetch(`/wiki/?people=${people}`)
+        .then(res => res.json())
+        .then(doc => {
+            if(doc[2].length){
+              peopleInfo.innerHTML = `<p>${doc[2]} <a href=${doc[3]} target="_blank">(Wikipedia)</a><p/>`;
+            
+          }
+        })
+        .catch(console.error);

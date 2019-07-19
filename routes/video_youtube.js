@@ -2,10 +2,12 @@ const router = require('express').Router();
 const { google } = require('googleapis');
 
 router.get('/video', (req, res) => {
-  if (req.session[req.session.movie_id]) {
-    return res.send(req.session[req.session.movie_id]);
+  const queryYoutube = req.query.queryYoutube;
+  if (req.session[queryYoutube]) {
+    console.log("queryYoutube session =", req.session.queryYoutube)
+    return res.send(req.session[queryYoutube]);
   }
-  const queryYoutube = req.session.queryYoutube;
+  console.log('queryYoutube =', queryYoutube)
   if (!queryYoutube) {
     return res.send('no video');
   }
@@ -31,7 +33,7 @@ router.get('/video', (req, res) => {
         // console.log('https://www.youtube.com/watch?v=' + element.id.videoId);
         return element.id.videoId;
       });
-      req.session[req.session.movie_id] = response;
+      req.session[queryYoutube] = response; // save the video link in the session so we do not request the same video more than once
       res.send(response);
     }
   );

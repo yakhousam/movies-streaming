@@ -36,6 +36,8 @@ app.use('/static', express.static('public'));
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
 
+app.use('/favicon.ico', express.static('public/images/favicon2.ico'));
+
 app.set('view engine', 'pug');
 app.set('views', 'views');
 

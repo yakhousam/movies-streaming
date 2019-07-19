@@ -3,13 +3,15 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-const route = express.Router();
+const router = express.Router();
 
-route.use((req, res, next) => {
+router.use((req, res, next) => {
   if (req.isAuthenticated()) {
-    res.locals.username = req.user.username;
+    res.locals.username = req.user.local.username || req.user.social.github.username || req.user.social.twitter.username;
+    res.locals.userPhoto = req.user.social.github.photo || req.user.social.twitter.photo;
     res.locals.authenticated = req.isAuthenticated();
   }
+  
   // console.log('isAuthenticated', req.isAuthenticated());
   res.locals.error = req.flash('error');
   res.locals.passwordError = req.flash('passwordError');
@@ -18,7 +20,7 @@ route.use((req, res, next) => {
   // console.log('session cookie', req.session.cookie)
   next();
 });
-route
+router
   .route('/login')
   .get((req, res) => {
     // console.log('redirect', req.header('Referer') || '/');
@@ -38,7 +40,7 @@ route
     }
   );
 
-route
+router
   .route('/register')
   .get((req, res) => {
     if (!/login|register/i.test(req.header('Referer'))) {
@@ -48,15 +50,15 @@ route
   })
   .post(
     (req, res, next) => {
-      User.findOne({ username: req.body.username }, (err, user) => {
+      User.findOne({ "local.username": req.body.username }, (err, user) => {
         if (err) return next(err);
         if (user) {
           req.flash('usernameError', 'Username already used');
           return res.redirect('/register');
         }
         const newUser = new User({
-          username: req.body.username,
-          password: req.body.password
+          local:{username: req.body.username,
+          password: req.body.password}
         });
         newUser.save(function(err) {
           if (err) {
@@ -86,9 +88,32 @@ route
     }
   );
 
-route.get('/logout', (req, res) => {
+// github login
+router.get('/auth/github',
+  passport.authenticate('github'));
+
+router.get('/auth/github/callback', 
+  passport.authenticate('github', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect(req.session.redirectTo || '/');
+  });
+
+// twitter login
+router.get('/auth/twitter',
+  passport.authenticate('twitter'));
+
+router.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect(req.session.redirectTo || '/');
+  });
+
+
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-module.exports = route;
+module.exports = router;

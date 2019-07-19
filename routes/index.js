@@ -9,26 +9,25 @@ const profile = require('./user_profile_route')
 const videoYoutube = require('./video_youtube');
 const wikipedia = require('./wikipedia_route');
 
-router.use(async (req, res, next) => {
+router.use(async (req, res, next) => { // TODO midelware is called twice
+  // console.log('=================================================================================================')
   if (!req.session.movieGenres || !req.session.serieGenres) {
     await setupMenu(req);
   }
   res.locals.movieGenres = req.session.movieGenres;
   res.locals.serieGenres = req.session.serieGenres;
-  res.locals.movieCount = req.session.movieCount;
-  res.locals.serieCount = req.session.serieCount;
   res.locals.blackTheme = req.session.blackTheme;
   res.locals.mostMoviesView = await getMostMoviesView();
+  // console.log("most viewed =", res.locals.mostMoviesView )
   if(process.env.NODE_ENV === 'production'){
     res.locals.production = true;
   }
   next();
 });
-
 router.use(userRoute);
 router.use(profile);
-router.use(movieByID, moviesRoute);
-// router.use(moviesRoute);
+router.use(movieByID);
+router.use(moviesRoute);
 router.use(videoYoutube);
 router.use(wikipedia);
 
@@ -45,7 +44,6 @@ router.get('/', async (req, res, next) => {
 });
 
 router.get('/theme', (req, res, next) => {
-  console.log('req.query.blackTheme=', req.query.blackTheme)
   req.session.blackTheme = req.query.blackTheme;
   res.locals.blackTheme = req.query.blackTheme;
   res.redirect(req.header('Referer') || '/')

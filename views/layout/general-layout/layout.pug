@@ -3,10 +3,11 @@ html(lang="en")
   head
     meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    if production
-      link(rel="stylesheet", href="/static/css/style-production.css")
-    else
-      link(rel="stylesheet", href="/static/css/style.css")
+    //- if production
+    //-   link(rel="stylesheet", href="/static/css/style-production.css")
+    //- else
+    //-   link(rel="stylesheet", href="/static/css/style.css")
+    link(rel="stylesheet", href="/static/css/style.css")
     title= title
   style
     if blackTheme == 1
@@ -27,4 +28,4 @@ html(lang="en")
             .github
               a(href="https://github.com/yakhousam/movies-streaming" target="_blank")
                 img(src="/static/images/github.png" alt="github")
-        block script
+    block script

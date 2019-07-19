@@ -22,7 +22,7 @@ function formatQuery(req, res) {
   let { page, search, sort, order, ...filter } = req.query;
   const query = { page, filter };
   const {writers, cast, directors}   = {...filter}
-  req.session.people = writers || cast || directors;// for wikipedia
+  res.locals.people = writers || cast || directors;// for wikipedia
   if (writers) {
     // because equality does not work eg: sergio leon (srory), sergio leon (screenplay)
     query.search = writers; //for paramsTitle
@@ -30,8 +30,8 @@ function formatQuery(req, res) {
     query.filter = { writers: { $regex: regexp } };
   }
   if (sort) {
-    if (sort === "imdb.rating") {
-      query.filter["imdb.rating"] = { $type: "double" };
+    if (sort === "imdb.rating" && filter.type) {
+      query.filter["imdb.rating"] = { $gt: 0 };
     }
     query.sort = { [sort]: order };
   } else {

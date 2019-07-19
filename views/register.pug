@@ -2,6 +2,9 @@ extends ./layout/general-layout/layout.pug
 block container
   main.main-container
     .form-container
+      .social-login
+        a(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Sign up with github
+        a(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Sign up with twiter
       form.login(action="/register", method="post")
         h1 Register
         if usernameError.length > 0
@@ -10,6 +13,5 @@ block container
         if passwordError.length > 0
           .error= passwordError
         input#password(type="password", name="password", placeholder="Password")
-        input#password(type="password", name="password2", placeholder="Confirm password")
+        //- input#password(type="password", name="password2", placeholder="Confirm password")
         input(type="submit", value="Register")
-        p #[a(href="/login") Sign in instead]

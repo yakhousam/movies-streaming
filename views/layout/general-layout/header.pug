@@ -54,7 +54,10 @@ header.header
     if authenticated
       .user-container
         .user
-          .user-first-letter #{username[0].toUpperCase()}
+          if userPhoto
+            img(src=userPhoto)
+          else
+            .user-first-letter #{username[0].toUpperCase()}
           .user-info 
             p.username #{username}      
             a(href="/profile") Profile

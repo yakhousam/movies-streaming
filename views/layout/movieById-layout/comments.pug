@@ -3,10 +3,15 @@
     each comment in comments
       .comment
         .user
-          .user-first-letter #{comment.user[0].username[0].toUpperCase()}
-        .user-creation Joined on: #{comment.user[0]._id.getTimestamp().toLocaleDateString()}
+          - var username = comment.user.username
+          - var photo = comment.user.photo
+          if photo
+            img(src=photo)
+          else
+            .user-first-letter #{username[0].toUpperCase()}
+        .user-creation Joined on: #{comment.user_id.getTimestamp().toLocaleDateString()}
         .comment-header 
-          span.username #{comment.user[0].username}
+          span.username #{username}
           span.comment-date #{comment._id.getTimestamp().toLocaleString()}
         .comment-text-container
           .comment-text !{`<p>${comment.text.replace(/\n/g, '</p><p>')}</p>`}
