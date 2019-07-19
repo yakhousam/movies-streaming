@@ -80,7 +80,7 @@ function(accessToken, refreshToken, profile, cb) {
   const update = {
     social: { google: { 
       id: profile.id, 
-      username: profile.username,
+      username: profile.displayName,
       photo: profile.photos[0].value 
     } }
   };
