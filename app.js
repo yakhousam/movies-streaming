@@ -8,7 +8,7 @@ const passport = require('passport')
 const flash = require('connect-flash')
 const auth = require('./auth')
 const helmet = require('helmet')
-const morgan = require('morgan')
+// const morgan = require('morgan')
 
 const app = express();
 
@@ -34,7 +34,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
