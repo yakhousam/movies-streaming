@@ -9,15 +9,34 @@ const profile = require('./user_profile_route')
 const videoYoutube = require('./video_youtube');
 const wikipedia = require('./wikipedia_route');
 
-router.use(async (req, res, next) => { // TODO midelware is called twice
-  // console.log('=================================================================================================')
+
+router.use('/favicon.ico', (req, res, next) =>{
+  console.log('favicon')
+  return res.sendFile(process.cwd() + '/public/images/favicon2.ico' )
+});
+
+router.get('/theme', (req, res, next) => {
+  req.session.blackTheme = req.query.blackTheme;
+  res.locals.blackTheme = req.query.blackTheme;
+  return res.redirect(req.header('Referer') || '/')
+})
+router.use(videoYoutube);
+router.use(wikipedia);
+
+router.use(async(req, res, next) => { // TODO midelware is called twice
+  //  console.log('=============================================================')
+  //  console.log('path =', req.path)
+  //  console.log('=============================================================')
+  //  console.log("req.session =", req.session)
   if (!req.session.movieGenres || !req.session.serieGenres) {
     await setupMenu(req);
   }
   res.locals.movieGenres = req.session.movieGenres;
   res.locals.serieGenres = req.session.serieGenres;
+  res.locals.movieCount = req.session.movieCount;
+  res.locals.serieCount = req.session.serieCount;
   res.locals.blackTheme = req.session.blackTheme;
-  res.locals.mostMoviesView = await getMostMoviesView();
+  await getMostMoviesView(res);
   // console.log("most viewed =", res.locals.mostMoviesView )
   if(process.env.NODE_ENV === 'production'){
     res.locals.production = true;
@@ -28,8 +47,7 @@ router.use(userRoute);
 router.use(profile);
 router.use(movieByID);
 router.use(moviesRoute);
-router.use(videoYoutube);
-router.use(wikipedia);
+
 
 router.get('/', async (req, res, next) => {
   try {
@@ -43,11 +61,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/theme', (req, res, next) => {
-  req.session.blackTheme = req.query.blackTheme;
-  res.locals.blackTheme = req.query.blackTheme;
-  res.redirect(req.header('Referer') || '/')
-})
+
 
 router.use((req, res, next) => {
   res.render('404');

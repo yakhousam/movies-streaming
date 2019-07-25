@@ -55,7 +55,7 @@ passport.use(new TwitterStrategy({
   callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/twitter/callback"
 },
 function(token, tokenSecret, profile, cb) {
-  console.log('twitter profile =', profile)
+  // console.log('twitter profile =', profile)
   const update = {
     social: { twitter: { 
       id: profile.id, 
@@ -76,7 +76,7 @@ passport.use(new GoogleStrategy({
   callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
-  console.log('gogole profile =', profile)
+  // console.log('gogole profile =', profile)
   const update = {
     social: { google: { 
       id: profile.id, 

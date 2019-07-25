@@ -6,7 +6,7 @@ mixin section-container(param)
           a(href=`/id/${article._id}`)
             .poster-container
               .img-container
-                img(src=`${article.poster }`)
+                img(src=`${article.poster || "" }`)
               .movie-info
                 h3.movie-year #{ parseInt(article.year) || 'n/a'}
                 h3.movie-rating

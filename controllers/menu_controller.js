@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Movies = mongoose.model('Movie');
+const {countMovies} = require('./movies_controller')
 
 const facet = {
     $facet: {
@@ -23,8 +24,8 @@ const setupMenu = async req => {
 const result = await Movies.aggregate([facet]);
 req.session.movieGenres = result[0].movies;
 req.session.serieGenres =result[0].series;
-// req.session.movieCount = result[0].moviesCount[0].count;
-// req.session.serieCount = result[0].seriesCount[0].count;
+req.session.movieCount = await countMovies({type: "movie"});
+req.session.serieCount = await countMovies({type: "series"});
 }catch(error){
 console.error(error);
 }

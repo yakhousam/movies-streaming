@@ -132,5 +132,6 @@ const getMovieById = async id => {
 module.exports = {
   getSample,
   getMoviesByQuery,
-  getMovieById
+  getMovieById,
+  countMovies
 };

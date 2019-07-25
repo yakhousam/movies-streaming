@@ -6,12 +6,12 @@ include ./layout/movieByQuery-layout/sort-menu.pug
 
 block container  
   main.main-container
-    if movies && movies.length > 1  
-      +sort-menu(route)   
-    +pages-nave(pages, currentPage, route) 
     +section-header(headerTitle)
+    +pages-nave(pages, currentPage, route) 
     if people
       .people-info
+    if movies && movies.length > 1  
+      +sort-menu(route)   
     +section-container(movies)
     +pages-nave(pages, currentPage, route) 
 block script

@@ -9,7 +9,7 @@
             img(src=photo)
           else
             .user-first-letter #{username[0].toUpperCase()}
-        .user-creation Joined on: #{comment.user_id.getTimestamp().toLocaleDateString()}
+        .user-creation Joined on: #{comment.commentedBy._id.getTimestamp().toLocaleDateString()}
         .comment-header 
           span.username #{username}
           span.comment-date #{comment._id.getTimestamp().toLocaleString()}

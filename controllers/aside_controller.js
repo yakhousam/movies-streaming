@@ -13,13 +13,14 @@ const projection = {
   view: 1
 };
 
-const getMostMoviesView = async () => {
+const getMostMoviesView = async (res) => {
   // console.log('getMostMoviesView')
   try {
     const movies = await Movies.find(
       { view: { $exists: true } },
       projection
     ).limit(10);
+    res.locals.mostMoviesView = movies;
     // const explain = await Movies.find({ view: { $exists: true } }, projection ).limit(10).explain()
     // console.log(explain)
     return movies;

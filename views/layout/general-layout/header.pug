@@ -1,7 +1,11 @@
 header.header
-  form.search(action="/movies") 
-    .inner-form 
+  form.left(action="/movies") 
+    input.btn-submit(type="submit" value='')
+    .search-wraper
       input#search(type="search", name="search" placeholder="Search...") 
+    .btn-options 
+      //- span Opts:
+      span.arrow &#9660;
       .search-options
         .radio
           input(type="radio" name="match" id="title" value="title" checked)
@@ -15,42 +19,38 @@ header.header
         .radio
           input(type="radio" name="match" id="writers" value="writers")
           label(for="writers") Writer
-  .space
-  nav.nav-bare 
-    ul
-      if !index
-        li #[a(href="/") Home]
-      if movieGenres
-        li
-          a(href="/movies?type=movie") Movies
-            span.arrow &#9660;
+  //- .space
+  nav.middle
+    if !index
+      a(href="/") Home
+    if movieGenres
+        .menu Movies
+          span.arrow &#9660;
           ul
             each genre in movieGenres
               li 
                 a(href=`/movies?type=movie&genres=${genre._id}`) #{genre._id} 
                   span #{genre.count}
-      if serieGenres
-        li
-          a(href="/movies?type=series") Series
-            span.arrow &#9660;
+    if serieGenres
+        .menu Series
+          span.arrow &#9660;
           ul
             each genre in serieGenres
               li 
                 a(href=`/movies?type=series&genres=${genre._id}`) #{genre._id} 
                   span #{genre.count}
-  .theme
-    if blackTheme == 1
-      a(href='/theme?blackTheme=0')
-        img(src="/static/images/sun.png")
-    else
-      a(href='/theme?blackTheme=1') 
-        img(src="/static/images/moon.png")    
+  //- .space
   .right  
+    .theme
+      if blackTheme == 1
+        a(href='/theme?blackTheme=0')
+          img(src="/static/images/sun.png")
+      else
+        a(href='/theme?blackTheme=1') 
+          img(src="/static/images/moon.png")    
     if !authenticated
-      nav.nav-bare
-        ul
-          li.login.menu #[a(href="/login") Login]
-          li.register.menu #[a(href="/register") Register]
+        a.login(href="/login") Login
+        a(href="/register") Register
     if authenticated
       .user-container
         .user

@@ -35,5 +35,8 @@
     "passport-local": "^1.0.0",
     "passport-twitter": "^1.0.4",
     "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.1"
   }
 }

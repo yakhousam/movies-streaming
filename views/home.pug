@@ -1,10 +1,13 @@
 extends ./layout/general-layout/layout.pug
 include ./layout/movieByQuery-layout/section-container.pug
-include ./layout/movieByQuery-layout/section-header.pug
+//- include ./layout/movieByQuery-layout/section-header.pug
 
 block container  
   main.main-container
     //- +section-header('Movies')
+    .home-header
+      a(href="/movies?type=movie") Movies #{movieCount}
+       a(href="/movies?type=series") Series #{serieCount}
     +section-container(movies)
     //- +section-header('Series')
     //- +section-container(series)

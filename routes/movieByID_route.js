@@ -21,17 +21,17 @@ router
       // console.log("movieById =", movie);
       comments.forEach(comment =>{
         let username, photo;
-        if(comment.user[0].local) username = comment.user[0].local.username
-        else if (comment.user[0].social)
-          if(comment.user[0].social.github) {
-            username = comment.user[0].social.github.username
-            photo = comment.user[0].social.github.photo
-          }else if(comment.user[0].social.twitter) {
-            username = comment.user[0].social.twitter.username
-            photo = comment.user[0].social.twitter.photo
-          }else if(comment.user[0].social.google) {
-            username = comment.user[0].social.google.username
-            photo = comment.user[0].social.google.photo
+        if(comment.commentedBy.local) username = comment.commentedBy.local.username
+        else if (comment.commentedBy.social)
+          if(comment.commentedBy.social.github) {
+            username = comment.commentedBy.social.github.username
+            photo = comment.commentedBy.social.github.photo
+          }else if(comment.commentedBy.social.twitter) {
+            username = comment.commentedBy.social.twitter.username
+            photo = comment.commentedBy.social.twitter.photo
+          }else if(comment.commentedBy.social.google) {
+            username = comment.commentedBy.social.google.username
+            photo = comment.commentedBy.social.google.photo
           }
         comment.user = { username, photo}
         return comment;

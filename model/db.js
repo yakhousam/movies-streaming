@@ -80,7 +80,7 @@ userSchema.methods.checkPassword = function(guess, done) {
  **********************************/
 const commentSchema = new Schema({
   movie_id: mongoose.Schema.Types.ObjectId,
-  user_id: mongoose.Schema.Types.ObjectId,
+  commentedBy:{type: mongoose.Schema.Types.ObjectId, ref: 'User'},
   text: String
 });
 

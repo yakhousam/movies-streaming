@@ -8,6 +8,7 @@ const passport = require('passport')
 const flash = require('connect-flash')
 const auth = require('./auth')
 const helmet = require('helmet')
+const morgan = require('morgan')
 
 const app = express();
 
@@ -23,7 +24,7 @@ app.use(
   session({
     secret: 'kldskfmqkdlsmfqm',
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 7 
+      maxAge: 1000 * 60 * 60 * 24 * 7 //one week 
     },
     resave: false,
     saveUninitialized: true,
@@ -32,16 +33,18 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/static', express.static('public'));
+
+app.use(morgan('dev'));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(flash());
-
-app.use('/favicon.ico', express.static('public/images/favicon2.ico'));
 
 app.set('view engine', 'pug');
 app.set('views', 'views');
 
-app.use(route);
+app.use('/static', express.static('public'));
+
+app.use(route)
 
 
 app.listen(process.env.PORT || 3000, () => {

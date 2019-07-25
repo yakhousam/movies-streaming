@@ -3,15 +3,13 @@ mixin pages-nave(pages, currentPage, route)
     - url = route.replace(/&?page=?\d*/g, '')
     - condition = (currentPage < pages[pages.length - 1]) && true
     .pages
-      ul
-        if currentPage > 0
-          li #[a(href=`${url}&page=${currentPage - 1}`) #[div.page <<]]
+      if currentPage > 0
+        a(href=`${url}&page=${currentPage - 1}`) <<
+      .pages-ellepsis
         each el in pages
-          li
-            if(el != currentPage)
-              a(href=`${url}&page=${el}`) 
-                .page= el
-            else
-              .current-page= el 
-        if condition
-          li #[a(href=`${url}&page=${currentPage + 1}`) #[div.page >>]]
+          if(el != currentPage)
+            a(href=`${url}&page=${el}`) #{el}
+          else
+            .current-page= el 
+      if condition
+        a(href=`${url}&page=${currentPage + 1}`)  >>
