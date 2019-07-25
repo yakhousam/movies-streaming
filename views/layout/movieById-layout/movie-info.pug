@@ -1,4 +1,5 @@
 .movie-view-info
+  a(name="sect-hd")
   if movie.title
     h1.title #{movie.title}
   figure.movie-info-poster
@@ -23,21 +24,21 @@
         h3 Cast:
         p
           each el in movie.cast
-            a(href=`/movies?cast=${el}`) #{el}
+            a(href=`/movies?cast=${el}#sect-hd`) #{el}
             | 
     if movie.directors && movie.directors.length
       .info
         h3 Directors:
         p
           each el in movie.directors
-            a(href=`/movies?directors=${el}`) #{el}
+            a(href=`/movies?directors=${el}#sect-hd`) #{el}
             | 
     if movie.writers && movie.writers.length
       .info
         h3 Writers:
         p
           each el in movie.writers
-            a(href=`/movies?writers=${el.split('(')[0].trim()}`) #{el}
+            a(href=`/movies?writers=${el.split('(')[0].trim()}#sect-hd`) #{el}
             | 
     if movie.countries && movie.countries.length
       .info
@@ -48,7 +49,7 @@
         h3 Genres:
         p 
           each el in movie.genres
-            a(href=`/movies?genres=${el}`) #{el}
+            a(href=`/movies?genres=${el}#sect-hd`) #{el}
             | 
     if movie.imdb && movie.imdb.rating
       .info

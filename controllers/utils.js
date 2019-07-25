@@ -1,7 +1,7 @@
 function getPages(currentPage, count, limit) {
   let pages = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  if (currentPage > 5) {
-    pages = pages.map(n => n + currentPage - 5);
+  if (currentPage > 4) {
+    pages = pages.map(n => n + currentPage - 4);
   }
   return pages.filter(x => x * limit < count);
 }
@@ -64,6 +64,7 @@ function formatQuery(req, res) {
    
     query.score = { $meta: "textScore" };
     query.sort = { score: { $meta: "textScore" } };
+    
   }
   return query;
 }

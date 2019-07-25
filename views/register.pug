@@ -1,12 +1,13 @@
 extends ./layout/general-layout/layout.pug
 block container
   main.main-container
+    a(name="sect-hd")
     .form-container
       .social-login
         a(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Sign up with github
         a(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Sign up with twiter
         a(href="/auth/google") #[img(src="/static/images/google.png" width="40px")] Sign up with google
-      form.login(action="/register", method="post")
+      form.local-login(action="/register", method="post")
         h1 Register
         if usernameError.length > 0
           .error= usernameError

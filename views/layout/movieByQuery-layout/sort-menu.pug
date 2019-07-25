@@ -2,17 +2,17 @@ mixin sort-menu(route)
   if route && !(/search/.test(route))
     - url = route.replace(/&?sort.[^\&]*/g, '').replace(/&page=\d+/g, '').replace(/&order=-?\d+/g, '')
     .sort-menu
-      a(href=`${url}&sort=title&order=${ sort && -sort.title || 1}`) Title
+      a(href=`${url}&sort=title&order=${ sort && -sort.title || 1}#sect-hd`) Title
           if sort && sort.title == -1
             span.arrow &#9660;
           if sort && sort.title == 1
             span.arrow &#9650;
-      a(href=`${url}&sort=year&order=${ sort && -sort.year || -1}`) Date 
+      a(href=`${url}&sort=year&order=${ sort && -sort.year || -1}#sect-hd`) Date 
           if sort && sort.year == -1
             span.arrow &#9660;
           if sort && sort.year == 1
             span.arrow &#9650;       
-      a(href=`${url}&sort=imdb.rating&order=${ sort && -sort['imdb.rating'] || -1}`) Rating 
+      a(href=`${url}&sort=imdb.rating&order=${ sort && -sort['imdb.rating'] || -1}#sect-hd`) Rating 
           if sort && sort['imdb.rating'] == -1
             span.arrow &#9660;
           if sort && sort['imdb.rating'] == 1

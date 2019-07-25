@@ -1,6 +1,7 @@
 extends ./layout/general-layout/layout.pug
 block container
   main.main-container
+    a(name="sect-hd")
     if username
       h1= 'Welcome '+ username
       a(href="/logout" ) Logout

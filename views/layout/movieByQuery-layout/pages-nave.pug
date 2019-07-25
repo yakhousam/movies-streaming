@@ -4,12 +4,12 @@ mixin pages-nave(pages, currentPage, route)
     - condition = (currentPage < pages[pages.length - 1]) && true
     .pages
       if currentPage > 0
-        a(href=`${url}&page=${currentPage - 1}`) <<
+        a(href=`${url}&page=${currentPage - 1}#sect-hd`) <<
       .pages-ellepsis
         each el in pages
           if(el != currentPage)
-            a(href=`${url}&page=${el}`) #{el}
+            a(href=`${url}&page=${el}#sect-hd`) #{el}
           else
             .current-page= el 
       if condition
-        a(href=`${url}&page=${currentPage + 1}`)  >>
+        a(href=`${url}&page=${currentPage + 1}#sect-hd`)  >>

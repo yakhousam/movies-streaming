@@ -5,7 +5,7 @@ aside.aside
     if mostMoviesView
       each article in mostMoviesView
         article.movie
-          a(href=`/id/${article._id}`)
+          a(href=`/id/${article._id}#sect-hd`)
             .poster-container
               .img-container
                 img(src=`${article.poster || "" }`)

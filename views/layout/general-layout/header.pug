@@ -1,5 +1,5 @@
 header.header
-  form.left(action="/movies") 
+  form.left(action="/movies#sect-hd") 
     input.btn-submit(type="submit" value='')
     .search-wraper
       input#search(type="search", name="search" placeholder="Search...") 
@@ -29,7 +29,7 @@ header.header
           ul
             each genre in movieGenres
               li 
-                a(href=`/movies?type=movie&genres=${genre._id}`) #{genre._id} 
+                a(href=`/movies?type=movie&genres=${genre._id}#sect-hd`) #{genre._id} 
                   span #{genre.count}
     if serieGenres
         .menu Series
@@ -37,7 +37,7 @@ header.header
           ul
             each genre in serieGenres
               li 
-                a(href=`/movies?type=series&genres=${genre._id}`) #{genre._id} 
+                a(href=`/movies?type=series&genres=${genre._id}#sect-hd`) #{genre._id} 
                   span #{genre.count}
   //- .space
   .right  
@@ -49,8 +49,8 @@ header.header
         a(href='/theme?blackTheme=1') 
           img(src="/static/images/moon.png")    
     if !authenticated
-        a.login(href="/login") Login
-        a(href="/register") Register
+        a.login(href="/login#sect-hd") Login
+        a.login(href="/register#sect-hd") Register
     if authenticated
       .user-container
         .user

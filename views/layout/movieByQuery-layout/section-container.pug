@@ -3,7 +3,7 @@ mixin section-container(param)
     if param
       each article in param
         article.movie
-          a(href=`/id/${article._id}`)
+          a(href=`/id/${article._id}#sect-hd`)
             .poster-container
               .img-container
                 img(src=`${article.poster || "" }`)

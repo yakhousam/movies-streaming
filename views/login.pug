@@ -1,16 +1,17 @@
 extends ./layout/general-layout/layout.pug
 block container
   main.main-container
+    a(name="sect-hd")
     .form-container
       .social-login
         a(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Login with github
         a(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Login with twiter
         a(href="/auth/google") #[img(src="/static/images/google.png" width="40px")] Login with google
-      form.login(action="/login", method="post")
+      form.local-login(action="/login", method="post")
         h1 Login
         if error.length
           p= error
         input#username(type="text", name="username" placeholder="User name" )
         input#password(type="password", name="password", placeholder="Password")
         input(type="submit", value="Login")
-        p #[a(href="/register") Create an account]
+        p #[a(href="/register#sect-hd") Create an account]
