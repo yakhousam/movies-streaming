@@ -30,9 +30,13 @@ passport.use(
 
 // github strategy
 passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/github/callback"
+  // clientID: process.env.GITHUB_CLIENT_ID,
+  // clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  // callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/github/callback"
+  clientID: "c6aba0891770c9b3a301",
+  clientSecret: "fe4b968282566b640b58a788aab75ae67da4c978",
+  callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+
 },
 function(accessToken, refreshToken, profile, cb) {
   const update = {

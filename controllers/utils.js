@@ -44,7 +44,7 @@ function formatQuery(req, res) {
     //   query.url = req.url.concat("&page=0");
     // }
     let regexp;
-    if (match !== "title" /*&& search.split(/\s+/).length > 1*/) {
+    if (match !== "all" /*&& search.split(/\s+/).length > 1*/) {
       regexp = new RegExp(
         search +
           "|" +

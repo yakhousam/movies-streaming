@@ -8,7 +8,10 @@ header.header
       span.arrow &#9660;
       .search-options
         .radio
-          input(type="radio" name="match" id="title" value="title" checked)
+          input(type="radio" name="match" id="all" value="all" checked)
+          label(for="all") All
+        .radio
+          input(type="radio" name="match" id="title" value="title")
           label(for="title") Title
         .radio
           input(type="radio" name="match" id="cast" value="cast")
@@ -41,13 +44,12 @@ header.header
                   span #{genre.count}
   //- .space
   .right  
-    .theme
-      if blackTheme == 1
-        a(href='/theme?blackTheme=0')
-          img(src="/static/images/sun.png")
-      else
-        a(href='/theme?blackTheme=1') 
-          img(src="/static/images/moon.png")    
+    if blackTheme == 1
+      a.theme(href='/theme?blackTheme=0')
+        img(src="/static/images/sun.png")
+    else
+      a.theme(href='/theme?blackTheme=1') 
+        img(src="/static/images/moon.png")    
     if !authenticated
         a.login(href="/login#sect-hd") Login
         a.login(href="/register#sect-hd") Register
@@ -60,7 +62,7 @@ header.header
             .user-first-letter #{username[0].toUpperCase()}
           .user-info 
             p.username #{username}      
-            a(href="/profile") Profile
+            a(href="/profile#sect-hd") Profile
             a(href="/logout") Logout
 
 

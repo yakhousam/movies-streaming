@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { getSample } = require('../controllers/movies_controller');
-const { setupMenu } = require('../controllers/menu_controller');
+// const { setupMenu } = require('../controllers/menu_controller');
 const { getMostMoviesView } = require('../controllers/aside_controller');
 const movieByID = require('./movieByID_route');
 const moviesRoute = require('./movies_route');
@@ -28,13 +28,13 @@ router.use(async(req, res, next) => { // TODO midelware is called twice
   //  console.log('path =', req.path)
   //  console.log('=============================================================')
   //  console.log("req.session =", req.session)
-  if (!req.session.movieGenres || !req.session.serieGenres) {
-    await setupMenu(req);
-  }
-  res.locals.movieGenres = req.session.movieGenres;
-  res.locals.serieGenres = req.session.serieGenres;
-  res.locals.movieCount = req.session.movieCount;
-  res.locals.serieCount = req.session.serieCount;
+  // if (!req.session.movieGenres || !req.session.serieGenres) {
+  //   await setupMenu(req);
+  // }
+  // res.locals.movieGenres = req.session.movieGenres;
+  // res.locals.serieGenres = req.session.serieGenres;
+  // res.locals.movieCount = req.session.movieCount;
+  // res.locals.serieCount = req.session.serieCount;
   res.locals.blackTheme = req.session.blackTheme;
   await getMostMoviesView(res);
   // console.log("most viewed =", res.locals.mostMoviesView )

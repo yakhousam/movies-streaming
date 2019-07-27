@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Comments = mongoose.model('Comment')
 
 const router = express.Router();
 
@@ -122,6 +123,16 @@ router.get('/auth/google/callback',
   });
 
 
+
+router.get('/accountDelete',  async (req, res) =>{
+  if(!req.isAuthenticated()){
+    res.redirect('/login')
+  }
+  const id = req.user._id;
+  await User.findByIdAndDelete(id);
+  await Comments.deleteMany({commentedBy:id})
+  res.redirect('/');
+})
 
 router.get('/logout', (req, res) => {
   req.logout();

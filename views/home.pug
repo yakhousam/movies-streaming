@@ -6,8 +6,8 @@ block container
   main.main-container
     //- +section-header('Movies')
     .home-header
-      a(href="/movies?type=movie") Movies #{movieCount}
-       a(href="/movies?type=series") Series #{serieCount}
+      a(href="/movies?type=movie#sect-hd") Movies #{movieCount}
+       a(href="/movies?type=series#sect-hd") Series #{serieCount}
     +section-container(movies)
     //- +section-header('Series')
     //- +section-container(series)

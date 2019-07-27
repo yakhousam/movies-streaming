@@ -4,16 +4,16 @@ block container
     a(name="sect-hd")
     .form-container
       .social-login
-        a(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Sign up with github
-        a(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Sign up with twiter
-        a(href="/auth/google") #[img(src="/static/images/google.png" width="40px")] Sign up with google
+        a.btn-social-login(href="/auth/github") #[img(src="/static/images/github.png" width="40px")] Sign up with github
+        a.btn-social-login(href="/auth/twitter") #[img(src="/static/images/twitter.png" width="40px")] Sign up with twiter
+        a.btn-social-login(href="/auth/google") #[img(src="/static/images/google.png" width="40px")] Sign up with google
       form.local-login(action="/register", method="post")
         h1 Register
         if usernameError.length > 0
           .error= usernameError
-        input#username(type="text", name="username" placeholder="Username")
+        input#username(type="text", name="username" placeholder="Username" minlength=2 required)
         if passwordError.length > 0
           .error= passwordError
-        input#password(type="password", name="password", placeholder="Password")
+        input#password(type="password", name="password", placeholder="Password" minlength=8 required)
         //- input#password(type="password", name="password2", placeholder="Confirm password")
-        input(type="submit", value="Register")
+        input.btn-social-login(type="submit", value="Register")

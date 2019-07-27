@@ -1,5 +1,6 @@
 require('dotenv').config();
 require('./model/db');
+const { setupMenu } = require('./controllers/menu_controller');
 const express = require('express');
 const route = require('./routes');
 const session = require('express-session')
@@ -15,6 +16,7 @@ const app = express();
 app.use(helmet())
 
 auth();
+setupMenu(app);
 
 const store =  new MongoDBStore({
   uri: process.env.NODE_ENV === 'production' ? process.env.dbUri : 'mongodb://localhost/movies',
