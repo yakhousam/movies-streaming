@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 const Comment = mongoose.model("Comment");
 
 const addComment = async (movie_id, user_id, text) => {
-  console.log("movieId=", movie_id);
-  console.log("user id=", user_id);
+  // console.log("movieId=", movie_id);
+  // console.log("user id=", user_id);
   if (text.length < 5) {
     return;
   }

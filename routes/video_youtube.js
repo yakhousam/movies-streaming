@@ -4,10 +4,10 @@ const { google } = require('googleapis');
 router.get('/video', (req, res) => {
   const queryYoutube = req.query.queryYoutube;
   if (req.session[queryYoutube]) {
-    console.log("queryYoutube session =", req.session.queryYoutube)
+    // console.log("queryYoutube session =", req.session.queryYoutube)
     return res.send(req.session[queryYoutube]);
   }
-  console.log('queryYoutube =', queryYoutube)
+  // console.log('queryYoutube =', queryYoutube)
   if (!queryYoutube) {
     return res.send('no video');
   }

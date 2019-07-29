@@ -56,7 +56,7 @@ const getMoviesByQuery = async (req, res) => {
     const currentPage = +page;
     const limit = 60;
     const skip = currentPage * limit;
-    console.log('filter=', filter)
+    // console.log('filter=', filter)
     let movies;
     if(sort.title && filter.type){
       movies = await Movies.find(filter,project).sort(sort).skip(skip).limit(limit).collation({locale:'fr'});
@@ -86,8 +86,7 @@ const getMoviesByQuery = async (req, res) => {
     );
     res.locals.sort = sort;
     const count = await countMovies(filter);
-    let movieType = movies[0].type;
-    movieType = movieType.endsWith('s') ? movieType : movieType + 's';
+    const movieType = movies[0].type === 'movie'? 'movies': 'series';
     const genresTile = filter.genres && `${movieType}-${filter.genres}`;
     const pageTitle =
       query.search ||

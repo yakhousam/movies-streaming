@@ -32,7 +32,7 @@ app.locals.serieGenres =result[0].series;
 app.locals.movieCount = await countMovies({type: "movie"});
 app.locals.serieCount = await countMovies({type: "series"});
 
-console.log('setupmenu.............................')
+// console.log('setupmenu.............................')
 
 }catch(error){
 console.error(error);

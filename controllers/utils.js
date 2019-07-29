@@ -57,7 +57,7 @@ function formatQuery(req, res) {
       query.filter = {
         $and: [{ $text: { $search: search } }, { [match]: { $regex: regexp } }]
       };
-      console.log(query.filter['$and'])
+      // console.log(query.filter['$and'])
     } else {
       query.filter = { $text: { $search: search } }
     }

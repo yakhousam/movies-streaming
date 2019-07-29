@@ -11,7 +11,7 @@ const wikipedia = require('./wikipedia_route');
 
 
 router.use('/favicon.ico', (req, res, next) =>{
-  console.log('favicon')
+  // console.log('favicon')
   return res.sendFile(process.cwd() + '/public/images/favicon2.ico' )
 });
 
