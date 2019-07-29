@@ -19,7 +19,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
-  color: #808080;
+  color: #000;
   color: var(--text-color);
 }
 .container {
@@ -101,7 +101,7 @@ a[name] {
   border-radius: 5px;
   display: inline-block;
   box-sizing: border-box;
-  color: #808080;
+  color: #000;
   color: var(--text-color);
   text-decoration: none;
 }
@@ -261,7 +261,7 @@ a[name] {
     var(--gradian-color-1),
     var(--gradian-color-3)
   );
-  color: #808080;
+  color: #000;
   color: var(--text-color);
 }
 .btn-submit,
@@ -414,7 +414,7 @@ a[name] {
 
 .sort-menu a {
   text-transform: capitalize;
-  color: #808080;
+  color: #000;
   color: var(--text-color);
 }
 
@@ -449,7 +449,7 @@ a[name] {
   padding: 0 1em;
 }
 .people-info a {
-  color: #808080;
+  color: #000;
   color: var(--text-color-2);
 }
 /**************************************************************/
@@ -475,7 +475,7 @@ a[name] {
 .home-header a {
   position: relative;
   padding: 0.5em 1em;
-  color: #808080;
+  color: #000;
   color: var(--text-color);
   text-decoration: none;
   border-radius: 5px;
@@ -692,7 +692,7 @@ a[name] {
   color: var(--text-color-2);
 }
 .movie-view-info a:hover {
-  color: #808080;
+  color: #000;
   color: var(--text-color);
 }
 .movie-view-info .title {
@@ -830,7 +830,7 @@ img.loading {
   background: var(--gradian-color-2);
   padding: 0.5em;
   border-radius: 1em / 50%;
-  color: #808080;
+  color: #000;
   color: var(--text-color);
   cursor: pointer;
 }
@@ -850,7 +850,7 @@ img.loading {
   background: var(--gradian-color-2);
 }
 .comments-container a {
-  color: #808080;
+  color: #000;
   color: var(--text-color);
 }
 .comments-container a:hover {
@@ -899,7 +899,7 @@ form.local-login {
     var(--gradian-color-1),
     var(--gradian-color-3)
   );
-  color: #808080;
+  color: #000;
   color: var(--text-color);
 }
 .btn-social-login:hover {
