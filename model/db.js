@@ -111,8 +111,13 @@ const movieSchema = new Schema({
 
 //  const movieSchema = new Schema({}, { strict: false });
 
+const audienceSchema = new Schema({
+  audience: {type: Number, default:0}
+})
+
 mongoose.model("Movie", movieSchema);
 mongoose.model("User", userSchema);
 mongoose.model("Comment", commentSchema);
+mongoose.model("Audience", audienceSchema)
 
-//db.movies.aggregate([{$match:{"type":"series"}}, {$project: {year: {$toInt:"$year"}}}])
+

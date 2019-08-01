@@ -35,6 +35,7 @@ router.use(async(req, res, next) => { // TODO midelware is called twice
   // res.locals.serieGenres = req.session.serieGenres;
   // res.locals.movieCount = req.session.movieCount;
   // res.locals.serieCount = req.session.serieCount;
+  req.app.locals.audience++;
   res.locals.blackTheme = req.session.blackTheme;
   await getMostMoviesView(res);
   // console.log("most viewed =", res.locals.mostMoviesView )

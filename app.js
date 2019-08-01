@@ -9,6 +9,8 @@ const passport = require('passport')
 const flash = require('connect-flash')
 const auth = require('./auth')
 const helmet = require('helmet')
+
+const audience = require('mongoose').model('Audience')
 // const morgan = require('morgan')
 
 const app = express();
@@ -24,7 +26,7 @@ const store =  new MongoDBStore({
 })
 app.use(
   session({
-    secret: 'kldskfmqkdlsmfqm',
+    secret: process.env.SECRET,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7 //one week 
     },
@@ -46,8 +48,16 @@ app.set('views', 'views');
 
 app.use('/static', express.static('public'));
 
-app.use(route)
+app.use(route);
 
+app.locals.audience = 0
+setInterval(async() => {
+  const view = app.locals.audience;
+  if(view > 0){
+    await audience.findOneAndUpdate({},{$inc:{audience: view}}, {upsert: true, useFindAndModify: false});
+    app.locals.audience -= view;
+  }  
+}, 1000 * 180);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log('Server started at http://localhost:3000');
