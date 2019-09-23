@@ -26,7 +26,7 @@ const store =  new MongoDBStore({
 })
 app.use(
   session({
-    secret: process.env.SECRET,
+    secret: process.env.SECRET || 'secret',
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 7 //one week 
     },

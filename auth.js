@@ -6,6 +6,8 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose')
 const User = mongoose.model('User')
 
+const dev = process.env.NODE_ENV !== 'production'
+
 // local strategy
 passport.use(
   new LocalStrategy(function(username, password, done) {
@@ -30,9 +32,9 @@ passport.use(
 
 // github strategy
 passport.use(new GitHubStrategy({
-  clientID: process.env.GITHUB_CLIENT_ID,
-  clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/github/callback" 
+  clientID: dev ? process.env.LOCAL_GITHUB_CLIENT_ID : process.env.GITHUB_CLIENT_ID,
+  clientSecret: dev ? process.env.LOCAL_GITHUB_SECRET : process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: dev ? "http://127.0.0.1:3000/auth/github/callback" : "https://mflix-yakhousam.herokuapp.com/auth/github/callback" 
 
 },
 function(accessToken, refreshToken, profile, cb) {
@@ -51,8 +53,8 @@ function(accessToken, refreshToken, profile, cb) {
 
 // twitter strategy
 passport.use(new TwitterStrategy({
-  consumerKey: process.env.TWITTER_CONSUMER_KEY,
-  consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
+  consumerKey: process.env.TWITTER_CONSUMER_KEY || '121212121212',
+  consumerSecret: process.env.TWITTER_CONSUMER_SECRET || 'secret',
   callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/twitter/callback"
 },
 function(token, tokenSecret, profile, cb) {
@@ -72,8 +74,8 @@ function(token, tokenSecret, profile, cb) {
 
 // google strategy
 passport.use(new GoogleStrategy({
-  clientID: process.env.GOOGLE_CLIENT_ID,
-  clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+  clientID: process.env.GOOGLE_CLIENT_ID || '121212121212',
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET || 'secret',
   callbackURL: "https://mflix-yakhousam.herokuapp.com/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, cb) {
