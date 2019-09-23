@@ -83,10 +83,12 @@ a[name] {
   margin-right: 1em;
 }
 .menu:last-child,
-.right > a:last-child {
+.right > a {
   margin-left: 1em;
 }
-
+.right > a:first-child{
+  margin: 0;
+}
 .middle > a,
 .menu,
 .right .login,
@@ -878,7 +880,7 @@ form.local-login {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  /* padding: 1em; */
   max-width: 90%;
   border-radius: 5px;
   box-shadow: 0 5px 2px 5px var(--gradian-color-4);
@@ -917,7 +919,8 @@ form.local-login {
 form.local-login input {
   box-sizing: border-box;
   height: 3em;
-  margin: 1em;
+  margin: 1em ;
+  max-width: 95%;
 }
 /*************************************************************/
 /*-------------------------------------
