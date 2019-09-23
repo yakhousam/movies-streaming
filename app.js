@@ -9,9 +9,10 @@ const passport = require('passport')
 const flash = require('connect-flash')
 const auth = require('./auth')
 const helmet = require('helmet')
+const logger = require('morgan')
 
 const audience = require('mongoose').model('Audience')
-// const morgan = require('morgan')
+const dev = process.env.NODE_ENV !== 'production'
 
 const app = express();
 
@@ -20,8 +21,10 @@ app.use(helmet())
 auth();
 setupMenu(app);
 
+if(dev) app.use(logger('dev'))
+
 const store =  new MongoDBStore({
-  uri: process.env.NODE_ENV === 'production' ? process.env.dbUri : 'mongodb://localhost/movies',
+  uri: dev ? 'mongodb://localhost/mflix' : process.env.dbUri,
   collection:'session'
 })
 app.use(
