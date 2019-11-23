@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 
-const dbUri =
-  process.env.NODE_ENV === "production"
-    ? process.env.dbUri
-    : "mongodb://localhost/mflix";
+const dbUri = process.env.dbUri
+  // process.env.NODE_ENV === "production"
+  //   ? process.env.dbUri
+  //   : "mongodb://localhost/mflix";
 
 mongoose.connect(dbUri, { useNewUrlParser: true });
 mongoose.connection.on("connected", () =>
