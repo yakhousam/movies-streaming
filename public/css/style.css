@@ -86,7 +86,7 @@ a[name] {
 .right > a {
   margin-left: 1em;
 }
-.right > a:first-child{
+.right > a:first-child {
   margin: 0;
 }
 .middle > a,
@@ -461,7 +461,6 @@ a[name] {
 ------------------------------------*/
 @keyframes home-button {
   100% {
-  
     background: linear-gradient(
       var(--gradian-color-1),
       var(--gradian-color-3),
@@ -487,7 +486,7 @@ a[name] {
     var(--gradian-color-1),
     var(--gradian-color-3)
   );
-  animation: home-button 500ms ease-in 50ms 5  ;
+  animation: home-button 500ms ease-in 50ms 5;
 }
 .home-header a::after {
   position: absolute;
@@ -919,10 +918,49 @@ form.local-login {
 form.local-login input {
   box-sizing: border-box;
   height: 3em;
-  margin: 1em ;
+  margin: 1em;
   max-width: 95%;
 }
 /*************************************************************/
+/***********************************************/
+/*            Fiveer         */
+.fiveer {
+  background-color: #fff;
+  border: 4px silver double;
+  width: 100%;
+  position: relative;
+}
+.fiveer-star-container{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20px;
+}
+.fiveer-star-container img{
+  height: 100%;
+}
+.fiveer-img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fiverr-profile-img {
+  width: 100%;
+}
+.fiverr-icon {
+  margin-top: -25%;
+  width: 50%;
+}
+.fiveer-title {
+  font-size: 1.3vw;
+  background-image: linear-gradient(rgb(53, 195, 80), rgb(3, 181, 37));
+  border-radius: 5px;
+  padding: .2em;
+  margin: .5em;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
 /*-------------------------------------
             media query
 --------------------------------------*/
@@ -962,7 +1000,7 @@ form.local-login input {
   .aside .movie-rating {
     font-size: 0.8rem;
   }
-  .section-container-aside .poster-container {
+  .section-container-aside .poster-container, .fiveer {
     width: 100px;
     height: 140px;
     padding: 0;
@@ -1004,4 +1042,4 @@ form.local-login input {
   }
    */
 }
-/***********************************************/
+
