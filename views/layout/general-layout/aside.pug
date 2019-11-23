@@ -2,6 +2,8 @@ aside.aside
   h1 Most viewed
   .arrow-down
   section.section-container-aside
+    article.movie
+      include fiveer.pug
     if mostMoviesView
       each article in mostMoviesView
         article.movie
