@@ -925,31 +925,23 @@ form.local-login input {
 /***********************************************/
 /*            Fiveer         */
 .fiveer {
-  background-color: #fff;
+  background-color: #000;
   border: 4px silver double;
   width: 100%;
-  position: relative;
 }
-.fiveer-star-container{
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 20px;
-}
-.fiveer-star-container img{
-  height: 100%;
-}
+
+
 .fiveer-img-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.fiverr-profile-img {
-  width: 100%;
+
+.fiverr-logo {
+  width: 80%;
 }
-.fiverr-icon {
-  margin-top: -25%;
-  width: 50%;
+.fiverr-stars{
+  width: 100%;
 }
 .fiveer-title {
   font-size: 1.3vw;
@@ -998,7 +990,9 @@ form.local-login input {
   .aside .movie-title,
   .aside .movie-year,
   .aside .movie-rating {
-    font-size: 0.8rem;
+    font-size: 0.8rem;.fiveer-star-container
+    each val in [0,1,2,3,4]
+      img(src="/static/images/icon-star.png")
   }
   .section-container-aside .poster-container, .fiveer {
     width: 100px;
@@ -1013,7 +1007,9 @@ form.local-login input {
   }
 
   /* .nav-bare > ul > li > a{
-    padding: .5em .3em ;
+    padding: .5em .3em ;.fiveer-star-container
+        each val in [0,1,2,3,4]
+          img(src="/static/images/icon-star.png")
     margin: 0;
   } */
 
