@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/yakhousam/movies-streaming#readme",
   "dependencies": {
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^2.2.0",
     "dotenv": "^8.0.0",
