@@ -6,4 +6,4 @@ an app that gives imformations about movies availible in the database and look f
 
 ## Deployement 
 
-depoloyed on heroku: [mflix-yakhousam](https://mflix-yakhousam.herokuapp.com)  
+depoloyed on heroku: [mflix-yakhousam](https://movies-streaming-ifcp.onrender.com)  
