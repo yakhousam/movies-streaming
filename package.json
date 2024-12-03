@@ -28,7 +28,7 @@
     "express-session": "^1.16.2",
     "googleapis": "^40.0.0",
     "helmet": "^3.18.0",
-    "mongoose": "^5.5.9",
+    "mongoose": "^5.7.5",
     "node-fetch": "^2.6.0",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
